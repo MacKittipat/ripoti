@@ -18,6 +18,12 @@ public class RipotiProperties {
     @Value(value = "${ripoti.uri.sprintquery}")
     private String sprintQueryUri;
 
+    @Value(value = "${ripoti.uri.search}")
+    private String searchUri;
+
+    @Value(value = "${ripoti.query.search}")
+    private String searchQuery;
+
     public String getJiraUrl() {
         return jiraUrl;
     }
@@ -50,6 +56,22 @@ public class RipotiProperties {
         this.sprintQueryUri = sprintQueryUri;
     }
 
+    public String getSearchUri() {
+        return searchUri;
+    }
+
+    public void setSearchUri(String searchUri) {
+        this.searchUri = searchUri;
+    }
+
+    public String getSearchQuery() {
+        return searchQuery;
+    }
+
+    public void setSearchQuery(String searchQuery) {
+        this.searchQuery = searchQuery;
+    }
+
     // =================================================================================================================
 
     public String getSessionUrl() {
@@ -62,5 +84,9 @@ public class RipotiProperties {
 
     public String getSprintQueryUrl(int viewId) {
         return getJiraUrl() + "/" + getSprintQueryUri() + "/" + viewId;
+    }
+
+    public String getSearchTaskUrl(int sprintId) {
+        return getJiraUrl() + "/" + getSearchUri() + getSearchQuery().replace("{sprintId}", Integer.toString(sprintId));
     }
 }
