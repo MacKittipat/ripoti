@@ -1,17 +1,14 @@
 package com.abctech.ripoti.webapp.json.jira;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class RapidView {
 
-    @JsonProperty(value = "views")
-    private RapidViewItem[] rapidViewItems;
+    private View[] views;
 
-    public RapidViewItem[] getRapidViewItems() {
-        return rapidViewItems;
+    public View[] getViews() {
+        return views;
     }
 
-    public void setRapidViewItems(RapidViewItem[] rapidViewItems) {
-        this.rapidViewItems = rapidViewItems;
+    public void setViews(View[] views) {
+        this.views = views;
     }
 }

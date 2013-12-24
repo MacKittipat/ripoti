@@ -2,7 +2,7 @@ package com.abctech.ripoti.webapp.json.jira;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class RapidViewItem {
+public class View {
 
     public int id;
     public String name;
@@ -45,7 +45,7 @@ public class RapidViewItem {
 
     @Override
     public String toString() {
-        return "RapidViewItem{" +
+        return "View{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
