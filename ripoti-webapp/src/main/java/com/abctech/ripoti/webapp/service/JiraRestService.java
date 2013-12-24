@@ -2,7 +2,7 @@ package com.abctech.ripoti.webapp.service;
 
 import com.abctech.ripoti.webapp.json.jira.JiraSession;
 import com.abctech.ripoti.webapp.json.jira.RapidView;
-import com.abctech.ripoti.webapp.json.jira.RapidViewItem;
+import com.abctech.ripoti.webapp.json.jira.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +39,11 @@ public class JiraRestService {
     }
 
     /**
-     * Get array of rapid view items.
+     * Get array of views.
      * @param base64Auth
-     * @return Array of rapid view items
+     * @return Array of views
      */
-    public RapidViewItem[] getRapidViewItems(String base64Auth) throws HttpClientErrorException {
+    public View[] getViews(String base64Auth) throws HttpClientErrorException {
         log.debug("Calling rest/greenhopper/1.0/rapidview");
         ResponseEntity<RapidView> response = restTemplate.exchange(
                 "https://apidev.atlassian.net/rest/greenhopper/1.0/rapidview",
@@ -51,9 +51,8 @@ public class JiraRestService {
                 createHeaderAuthorization(base64Auth),
                 RapidView.class);
         RapidView rapidView = response.getBody();
-        return rapidView.getRapidViewItems();
+        return rapidView.getViews();
     }
-
 
     /**
      * Create header Authorization for authenticate Jira's REST service.
