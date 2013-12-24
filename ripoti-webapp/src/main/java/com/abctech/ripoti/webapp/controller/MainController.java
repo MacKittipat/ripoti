@@ -3,8 +3,8 @@ package com.abctech.ripoti.webapp.controller;
 import com.abctech.ripoti.webapp.form.AuthForm;
 import com.abctech.ripoti.webapp.form.ReportBuilderForm;
 import com.abctech.ripoti.webapp.json.jira.JiraSession;
+import com.abctech.ripoti.webapp.json.jira.Sprint;
 import com.abctech.ripoti.webapp.json.jira.View;
-import com.abctech.ripoti.webapp.properties.RipotiProperties;
 import com.abctech.ripoti.webapp.service.IJiraAuthStorageService;
 import com.abctech.ripoti.webapp.service.JiraRestService;
 import com.abctech.ripoti.webapp.util.Base64Util;
@@ -61,8 +61,12 @@ public class MainController {
     }
 
     @RequestMapping(value = "report")
-    public String report(Model model, HttpServletRequest request, @ModelAttribute ReportBuilderForm reportBuilderForm) {
+    public String report(
+            Model model,
+            HttpServletRequest request,
+            @ModelAttribute ReportBuilderForm reportBuilderForm) {
         model.addAttribute("pageContent", "main/report");
+        // Generate viewMap for ddl.
         View[] views = jiraRestService.getViews(
                 jiraAuthStorageService.getAuthorizationValue());
         Map<String, String> viewMap = new LinkedHashMap<>();
@@ -71,6 +75,21 @@ public class MainController {
             viewMap.put(Integer.toString(view.getId()), view.getName());
         }
         model.addAttribute("viewMap", viewMap);
+        // Generate sprintMap for ddl.
+        if(reportBuilderForm.getViewId() != null) {
+            Map<String, String> sprintMap = new LinkedHashMap<>();
+            Sprint[] sprints = jiraRestService.getSprints(
+                    jiraAuthStorageService.getAuthorizationValue(),
+                    reportBuilderForm.getViewId());
+            sprintMap.put("0", "Please select");
+            for(Sprint sprint : sprints) {
+                sprintMap.put(Integer.toString(sprint.getId()), sprint.getName());
+            }
+            if(reportBuilderForm.getSprintId() != null) {
+                model.addAttribute("sprintMap", sprintMap);
+                // TODO Display report ...
+            }
+        }
         return "layout";
     }
 }

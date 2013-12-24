@@ -1,9 +1,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div>
-    <form:form commandName="reportBuilderForm">
+    <form:form commandName="reportBuilderForm" method="get">
         <form:select path="viewId" items="${viewMap}" />
-        <form:select path="sprintId" />
+        <form:select path="sprintId" items="${sprintMap}" />
+        <input type="submit" value="Show Report" />
     </form:form>
 </div>
 <script type="text/javascript">

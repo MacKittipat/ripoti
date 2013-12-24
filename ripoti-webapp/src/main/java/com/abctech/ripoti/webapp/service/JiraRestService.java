@@ -78,6 +78,12 @@ public class JiraRestService {
         return sprintQuery.getSprints();
     }
 
+    /**
+     * Get search.
+     * @param base64Auth
+     * @param sprintId
+     * @return Search.
+     */
     public Search getSearch(String base64Auth, int sprintId) throws HttpClientErrorException {
         log.debug("Calling rest/api/2/search?jql=...");
         ResponseEntity<Search> response = restTemplate.exchange(

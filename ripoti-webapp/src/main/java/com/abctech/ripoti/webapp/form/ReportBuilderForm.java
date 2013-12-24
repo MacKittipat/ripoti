@@ -2,22 +2,22 @@ package com.abctech.ripoti.webapp.form;
 
 public class ReportBuilderForm {
 
-    public int viewId;
-    public int sprintId;
+    public Integer viewId;
+    public Integer sprintId;
 
-    public int getViewId() {
+    public Integer getViewId() {
         return viewId;
     }
 
-    public void setViewId(int viewId) {
+    public void setViewId(Integer viewId) {
         this.viewId = viewId;
     }
 
-    public int getSprintId() {
+    public Integer getSprintId() {
         return sprintId;
     }
 
-    public void setSprintId(int sprintId) {
+    public void setSprintId(Integer sprintId) {
         this.sprintId = sprintId;
     }
 }
