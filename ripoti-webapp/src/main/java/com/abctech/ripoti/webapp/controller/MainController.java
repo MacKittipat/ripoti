@@ -1,7 +1,9 @@
 package com.abctech.ripoti.webapp.controller;
 
 import com.abctech.ripoti.webapp.form.AuthForm;
+import com.abctech.ripoti.webapp.form.ReportBuilderForm;
 import com.abctech.ripoti.webapp.json.jira.JiraSession;
+import com.abctech.ripoti.webapp.json.jira.View;
 import com.abctech.ripoti.webapp.service.JiraRestService;
 import com.abctech.ripoti.webapp.util.Base64Util;
 import org.slf4j.Logger;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.HttpClientErrorException;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Controller
 public class MainController {
@@ -46,6 +50,20 @@ public class MainController {
                 model.addAttribute("errorMsg", "Authentication fail, Username or Password is not correct.");
             }
         }
+        return "layout";
+    }
+
+    @RequestMapping(value = "report")
+    public String report(Model model, HttpServletRequest request, @ModelAttribute ReportBuilderForm reportBuilderForm) {
+        model.addAttribute("pageContent", "main/report");
+        View[] views = jiraRestService.getViews(
+                request.getSession().getAttribute("authorization").toString());
+        Map<String, String> viewMap = new LinkedHashMap<>();
+        viewMap.put("0", "Please select");
+        for(View view : views) {
+            viewMap.put(Integer.toString(view.getId()), view.getName());
+        }
+        model.addAttribute("viewMap", viewMap);
         return "layout";
     }
 
