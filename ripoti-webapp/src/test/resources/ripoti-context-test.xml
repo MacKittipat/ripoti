@@ -9,15 +9,9 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
-    <!-- Assets location -->
-    <mvc:resources mapping="/assets/**" location="/assets/" />
-
-    <mvc:annotation-driven ignore-default-model-on-redirect="true" />
-
     <context:component-scan base-package="com.abctech.ripoti.webapp.controller" />
     <context:component-scan base-package="com.abctech.ripoti.webapp.service" />
     <context:component-scan base-package="com.abctech.ripoti.webapp.properties" />
-
 
     <bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
@@ -25,7 +19,6 @@
         <property name="targetMethod" value="configure" />
         <property name="arguments">
             <list>
-                <!-- Ignore field in json that does not exit in POJO -->
                 <value type="com.fasterxml.jackson.databind.DeserializationFeature">FAIL_ON_UNKNOWN_PROPERTIES</value>
                 <value>false</value>
             </list>
@@ -43,39 +36,6 @@
         </property>
     </bean>
 
-    <!-- Properties files -->
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <!--
-                Spring load properties from top to bottom.
-                If same properties exist in first and last file in list, it will use use properties of last file.
-                -->
-                <value>classpath:config/ripoti.properties</value>
-                <value>file:/etc/ripoti/ripoti.properties</value>
-            </list>
-        </property>
-        <property name="ignoreUnresolvablePlaceholders" value="true"/>
-        <!-- Set to true. If /etc/ripoti/ripoti.properties does not exist, spring will not throw exception.-->
-        <property name="ignoreResourceNotFound" value="true"/>
-    </bean>
-
-    <!-- View -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix">
-            <value>/WEB-INF/jsp/</value>
-        </property>
-        <property name="suffix">
-            <value>.jsp</value>
-        </property>
-    </bean>
-
-    <!-- Profile -->
-    <beans profile="">
-        <bean id="jiraAuthStorageService" class="com.abctech.ripoti.webapp.service.JiraAuthSessionStorageService" />
-    </beans>
-    <beans profile="development">
-        <bean id="jiraAuthStorageService" class="com.abctech.ripoti.webapp.service.JiraAuthFileStorageService" />
-    </beans>
+    <bean id="jiraAuthStorageService" class="com.abctech.ripoti.webapp.service.JiraAuthSessionStorageService" />
 
 </beans>
