@@ -2,6 +2,8 @@ package com.abctech.ripoti.webapp.service;
 
 import com.abctech.ripoti.webapp.json.jira.JiraSession;
 import com.abctech.ripoti.webapp.json.jira.RapidView;
+import com.abctech.ripoti.webapp.json.jira.Sprint;
+import com.abctech.ripoti.webapp.json.jira.SprintQuery;
 import com.abctech.ripoti.webapp.json.jira.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,6 +54,23 @@ public class JiraRestService {
                 RapidView.class);
         RapidView rapidView = response.getBody();
         return rapidView.getViews();
+    }
+
+    /**
+     * Get array of sprints.
+     * @param base64Auth
+     * @param rapidViewId
+     * @return Array of sprints
+     */
+    public Sprint[] getSprints(String base64Auth, int rapidViewId) throws HttpClientErrorException {
+        log.debug("Calling rest/greenhopper/1.0/sprintquery/{}", rapidViewId);
+        ResponseEntity<SprintQuery> response = restTemplate.exchange(
+                "https://apidev.atlassian.net/rest/greenhopper/1.0/sprintquery/34",
+                HttpMethod.GET,
+                createHeaderAuthorization(base64Auth),
+                SprintQuery.class);
+        SprintQuery sprintQuery = response.getBody();
+        return sprintQuery.getSprints();
     }
 
     /**
