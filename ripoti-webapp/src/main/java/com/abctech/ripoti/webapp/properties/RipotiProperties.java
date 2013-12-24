@@ -86,7 +86,7 @@ public class RipotiProperties {
         return getJiraUrl() + "/" + getSprintQueryUri() + "/" + viewId;
     }
 
-    public String getSearchTaskUrl(int sprintId) {
+    public String getSearchUrl(int sprintId) {
         return getJiraUrl() + "/" + getSearchUri() + getSearchQuery().replace("{sprintId}", Integer.toString(sprintId));
     }
 }

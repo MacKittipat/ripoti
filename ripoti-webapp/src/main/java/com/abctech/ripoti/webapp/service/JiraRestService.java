@@ -5,6 +5,7 @@ import com.abctech.ripoti.webapp.json.jira.RapidView;
 import com.abctech.ripoti.webapp.json.jira.Sprint;
 import com.abctech.ripoti.webapp.json.jira.SprintQuery;
 import com.abctech.ripoti.webapp.json.jira.View;
+import com.abctech.ripoti.webapp.json.jira.search.Search;
 import com.abctech.ripoti.webapp.properties.RipotiProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,6 +76,17 @@ public class JiraRestService {
                 SprintQuery.class);
         SprintQuery sprintQuery = response.getBody();
         return sprintQuery.getSprints();
+    }
+
+    public Search getSearch(String base64Auth, int sprintId) throws HttpClientErrorException {
+        log.debug("Calling rest/api/2/search?jql=...");
+        ResponseEntity<Search> response = restTemplate.exchange(
+                ripotiProperties.getSearchUrl(sprintId),
+                HttpMethod.GET,
+                createHeaderAuthorization(base64Auth),
+                Search.class);
+        Search search = response.getBody();
+        return search;
     }
 
     /**

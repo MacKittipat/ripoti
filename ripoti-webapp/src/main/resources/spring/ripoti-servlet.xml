@@ -18,7 +18,22 @@
     <context:component-scan base-package="com.abctech.ripoti.webapp.service" />
     <context:component-scan base-package="com.abctech.ripoti.webapp.properties" />
 
-    <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+
+    <bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="jacksonObjectMapper" />
+        <property name="targetMethod" value="configure" />
+        <property name="arguments">
+            <list>
+                <!-- Ignore field in json that does not exit in POJO -->
+                <value type="com.fasterxml.jackson.databind.DeserializationFeature">FAIL_ON_UNKNOWN_PROPERTIES</value>
+                <value>false</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="objectMapper" ref="jacksonObjectMapper" />
+    </bean>
 
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
         <property name="messageConverters">
