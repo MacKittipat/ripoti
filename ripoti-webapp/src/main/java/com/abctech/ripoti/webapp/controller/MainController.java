@@ -4,6 +4,7 @@ import com.abctech.ripoti.webapp.form.AuthForm;
 import com.abctech.ripoti.webapp.form.ReportBuilderForm;
 import com.abctech.ripoti.webapp.json.jira.JiraSession;
 import com.abctech.ripoti.webapp.json.jira.View;
+import com.abctech.ripoti.webapp.service.IJiraAuthStorageService;
 import com.abctech.ripoti.webapp.service.JiraRestService;
 import com.abctech.ripoti.webapp.util.Base64Util;
 import org.slf4j.Logger;
@@ -29,6 +30,9 @@ public class MainController {
     @Autowired
     private JiraRestService jiraRestService;
 
+    @Autowired
+    private IJiraAuthStorageService jiraAuthStorageService;
+
     @RequestMapping(value = {"/", "/index"})
     public String index() {
         return "redirect:auth";
@@ -37,6 +41,9 @@ public class MainController {
     @RequestMapping(value = "auth")
     public String auth(Model model, HttpServletRequest request, @ModelAttribute AuthForm authForm) {
         model.addAttribute("pageContent", "main/auth");
+        if(jiraAuthStorageService.getAuthorizationValue() != null) {
+            return "redirect:report";
+        }
         if(RequestMethod.POST.toString().equals(request.getMethod())) {
             log.info("User {} is authenticating for Jira's REST service", authForm.getUsername());
             try {
@@ -57,7 +64,7 @@ public class MainController {
     public String report(Model model, HttpServletRequest request, @ModelAttribute ReportBuilderForm reportBuilderForm) {
         model.addAttribute("pageContent", "main/report");
         View[] views = jiraRestService.getViews(
-                request.getSession().getAttribute("authorization").toString());
+                jiraAuthStorageService.getAuthorizationValue());
         Map<String, String> viewMap = new LinkedHashMap<>();
         viewMap.put("0", "Please select");
         for(View view : views) {
@@ -65,11 +72,5 @@ public class MainController {
         }
         model.addAttribute("viewMap", viewMap);
         return "layout";
-    }
-
-    @RequestMapping(value = "test")
-    public @ResponseBody String test(HttpServletRequest request) {
-        log.debug(">>> " + request.getSession().getAttribute("authorization"));
-        return "test";
     }
 }
