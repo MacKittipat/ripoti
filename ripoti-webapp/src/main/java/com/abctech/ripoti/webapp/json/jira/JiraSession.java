@@ -2,7 +2,7 @@ package com.abctech.ripoti.webapp.json.jira;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Session {
+public class JiraSession {
 
     private String name;
     private String errorMessages;
@@ -45,7 +45,7 @@ public class Session {
 
     @Override
     public String toString() {
-        return "Session{" +
+        return "JiraSession{" +
                 "name='" + name + '\'' +
                 ", errorMessages='" + errorMessages + '\'' +
                 '}';
