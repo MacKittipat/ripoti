@@ -5,6 +5,7 @@ import com.abctech.ripoti.webapp.json.jira.RapidView;
 import com.abctech.ripoti.webapp.json.jira.Sprint;
 import com.abctech.ripoti.webapp.json.jira.SprintQuery;
 import com.abctech.ripoti.webapp.json.jira.View;
+import com.abctech.ripoti.webapp.properties.RipotiProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class JiraRestService {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private RipotiProperties ripotiProperties;
+
     /**
      * Get session.
      * @param base64Auth
@@ -32,7 +36,7 @@ public class JiraRestService {
     public JiraSession getJiraSession(String base64Auth) throws HttpClientErrorException {
         log.debug("Calling rest/auth/1/session");
         ResponseEntity<JiraSession> response = restTemplate.exchange(
-                "https://apidev.atlassian.net/rest/auth/1/session",
+                ripotiProperties.getSessionUrl(),
                 HttpMethod.GET,
                 createHeaderAuthorization(base64Auth),
                 JiraSession.class);
@@ -48,7 +52,7 @@ public class JiraRestService {
     public View[] getViews(String base64Auth) throws HttpClientErrorException {
         log.debug("Calling rest/greenhopper/1.0/rapidview");
         ResponseEntity<RapidView> response = restTemplate.exchange(
-                "https://apidev.atlassian.net/rest/greenhopper/1.0/rapidview",
+                ripotiProperties.getRapidViewUrl(),
                 HttpMethod.GET,
                 createHeaderAuthorization(base64Auth),
                 RapidView.class);
@@ -59,13 +63,13 @@ public class JiraRestService {
     /**
      * Get array of sprints.
      * @param base64Auth
-     * @param rapidViewId
+     * @param viewId
      * @return Array of sprints
      */
-    public Sprint[] getSprints(String base64Auth, int rapidViewId) throws HttpClientErrorException {
-        log.debug("Calling rest/greenhopper/1.0/sprintquery/{}", rapidViewId);
+    public Sprint[] getSprints(String base64Auth, int viewId) throws HttpClientErrorException {
+        log.debug("Calling rest/greenhopper/1.0/sprintquery/{}", viewId);
         ResponseEntity<SprintQuery> response = restTemplate.exchange(
-                "https://apidev.atlassian.net/rest/greenhopper/1.0/sprintquery/34",
+                ripotiProperties.getSprintQueryUrl(viewId),
                 HttpMethod.GET,
                 createHeaderAuthorization(base64Auth),
                 SprintQuery.class);

@@ -9,12 +9,14 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
+    <!-- Assets location -->
     <mvc:resources mapping="/assets/**" location="/assets/" />
 
     <mvc:annotation-driven ignore-default-model-on-redirect="true" />
 
     <context:component-scan base-package="com.abctech.ripoti.webapp.controller" />
     <context:component-scan base-package="com.abctech.ripoti.webapp.service" />
+    <context:component-scan base-package="com.abctech.ripoti.webapp.properties" />
 
     <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
 
@@ -24,6 +26,23 @@
                 <ref bean="jacksonMessageConverter" />
             </list>
         </property>
+    </bean>
+
+    <!-- Properties files -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <!--
+                Spring load properties from top to bottom.
+                If same properties exist in first and last file in list, it will use use properties of last file.
+                -->
+                <value>classpath:config/ripoti.properties</value>
+                <value>file:/etc/ripoti/ripoti.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <!-- Set to true. If /etc/ripoti/ripoti.properties does not exist, spring will not throw exception.-->
+        <property name="ignoreResourceNotFound" value="true"/>
     </bean>
 
     <!-- View -->
@@ -36,6 +55,7 @@
         </property>
     </bean>
 
+    <!-- Profile -->
     <beans profile="">
         <bean id="jiraAuthStorageService" class="com.abctech.ripoti.webapp.service.JiraAuthSessionStorageService" />
     </beans>

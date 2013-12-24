@@ -17,7 +17,8 @@ public class JiraAuthFileStorageService implements IJiraAuthStorageService {
     public String getAuthorizationValue() {
         StringBuilder sb = new StringBuilder();
         try {
-            BufferedReader br = new BufferedReader(new FileReader("/etc/ripoti"));
+            // Intentionally hard code location of file. Only developer know location of this file.
+            BufferedReader br = new BufferedReader(new FileReader("/etc/ripoti.txt"));
             String line = br.readLine();
             while (line != null) {
                 sb.append(line);

@@ -4,6 +4,7 @@ import com.abctech.ripoti.webapp.form.AuthForm;
 import com.abctech.ripoti.webapp.form.ReportBuilderForm;
 import com.abctech.ripoti.webapp.json.jira.JiraSession;
 import com.abctech.ripoti.webapp.json.jira.View;
+import com.abctech.ripoti.webapp.properties.RipotiProperties;
 import com.abctech.ripoti.webapp.service.IJiraAuthStorageService;
 import com.abctech.ripoti.webapp.service.JiraRestService;
 import com.abctech.ripoti.webapp.util.Base64Util;
@@ -15,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.HttpClientErrorException;
 
 import javax.servlet.http.HttpServletRequest;
