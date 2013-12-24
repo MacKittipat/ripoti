@@ -36,13 +36,10 @@ public class MainController {
         if(RequestMethod.POST.toString().equals(request.getMethod())) {
             log.info("User {} is authenticating for Jira's REST service", authForm.getUsername());
             try {
-                JiraSession jiraSession = jiraRestService.getJiraSession(
-                        authForm.getUsername(),
-                        authForm.getPassword());
+                String base64Auth = Base64Util.encode(authForm.getUsername() + ":" + authForm.getPassword());
+                JiraSession jiraSession = jiraRestService.getJiraSession(base64Auth);
                 log.debug(jiraSession.toString());
-                request.getSession().setAttribute(
-                        "authorization",
-                        Base64Util.encode(authForm.getUsername() + ":" + authForm.getPassword()));
+                request.getSession().setAttribute("authorization", base64Auth);
                 log.info("Authentication success");
             } catch (HttpClientErrorException e) {
                 log.warn("Authentication fail", e);

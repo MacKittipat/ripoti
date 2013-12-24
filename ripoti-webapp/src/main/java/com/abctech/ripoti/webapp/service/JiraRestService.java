@@ -1,7 +1,6 @@
 package com.abctech.ripoti.webapp.service;
 
 import com.abctech.ripoti.webapp.json.jira.JiraSession;
-import com.abctech.ripoti.webapp.util.Base64Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +22,14 @@ public class JiraRestService {
 
     /**
      * Get session.
-     * @param username
-     * @param password
+     * @param base64Auth
      * @return JiraSession
      */
-    public JiraSession getJiraSession(String username, String password) throws HttpClientErrorException {
+    public JiraSession getJiraSession(String base64Auth) throws HttpClientErrorException {
         ResponseEntity<JiraSession> response = restTemplate.exchange(
                 "https://apidev.atlassian.net/rest/auth/1/session",
                 HttpMethod.GET,
-                createHeaderAuthorization(username, password),
+                createHeaderAuthorization(base64Auth),
                 JiraSession.class);
         JiraSession jiraSession = response.getBody();
         return jiraSession;
@@ -39,14 +37,12 @@ public class JiraRestService {
 
     /**
      * Create header Authorization for authenticate Jira's REST service.
-     * @param username
-     * @param password
+     * @param base64Auth
      * @return header Authorization
      */
-    private HttpEntity<String> createHeaderAuthorization(String username, String password) {
-        String base64Creds = Base64Util.encode(username + ":" + password);
+    private HttpEntity<String> createHeaderAuthorization(String base64Auth) {
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Basic " + base64Creds);
+        headers.add("Authorization", "Basic " + base64Auth);
         return new HttpEntity<>(headers);
     }
 }
