@@ -9,7 +9,31 @@
     <div>
         ${ripotiJson}
     </div>
+    <div>
+        <div data-bind="foreach: parentIssues">
+            <div>
+                <div style="background-color: lightgray">
+                    <span data-bind="text: title"></span>
+                    <span data-bind="text: timeSpent.value"></span>
+                </div>
+                <div data-bind="foreach: childIssues">
+                    <div>
+                        <span data-bind="text: title"></span>
+                        <span data-bind="text: timeSpent.value"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="background-color: darkgrey">
+            <span>Total</span>
+            <span data-bind="text: timeSpent.value"></span>
+        </div>
+    </div>
 </div>
+<div>
+
+</div>
+<script type="text/javascript" src="<spring:url value='/assets/js/knockout/knockout-3.0.0.js' />"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $("#viewId").change(function() {
@@ -21,4 +45,68 @@
             })
         });
     });
+
+    // Binding Ripoti json with html
+    var ripotiJson = ${ripotiJson};
+
+    function createParentIssues() {
+        var parentIssues = new Array();
+        for(var i=0; i<ripotiJson.parentIssues.length; i++) {
+            var parentIssue = ripotiJson.parentIssues[i];
+            var childIssues = new Array();
+            for(var j=0; j<parentIssue.childIssues.length; j++) {
+                var childIssue = parentIssue.childIssues[j];
+                childIssues.push(new ChildIssue(childIssue.title, childIssue.timeSpent.value));
+            }
+            parentIssues.push(new ParentIssue(parentIssue.title, ko.observableArray(childIssues)))
+        }
+        return parentIssues;
+    }
+
+    function ParentIssue(title, childIssues) {
+        var self = this;
+        self.title = title;
+        self.timeSpent = new Object();
+        self.timeSpent.value = ko.computed(function() {
+            var myChildIssues = childIssues();
+            var timeSpentValue = 0;
+            for(var i=0; i<myChildIssues.length; i++) {
+                timeSpentValue += myChildIssues[i].timeSpent.value();
+            }
+            return timeSpentValue;
+        }, childIssues);
+        self.childIssues = childIssues;
+    }
+
+    function ChildIssue(title, timeSpentValue) {
+        var self = this;
+        self.title = title;
+        self.timeSpent = new Object();
+        self.timeSpent.value = ko.observable(timeSpentValue);
+    }
+
+    function RipotiIssue() {
+        var self = this;
+        self.parentIssues = ko.observableArray(createParentIssues());
+        self.timeSpent = new Object();
+        self.timeSpent.value = ko.computed(function() {
+            var myParentIssues = self.parentIssues();
+            var timeSpentValue = 0;
+            for(var i=0; i< myParentIssues.length; i++) {
+                timeSpentValue += myParentIssues[i].timeSpent.value();
+            }
+            return timeSpentValue;
+        }, self);
+
+        self.removeParentIssue = function() {
+
+        }
+
+        self.removeChildIssue = function() {
+
+        }
+    }
+
+    var ripotiIssue = new RipotiIssue();
+    ko.applyBindings(ripotiIssue);
 </script>
