@@ -15,6 +15,11 @@ public class JiraToRipotiService {
 
     private static final String TIME_SPENT_UNIT = "hour";
 
+    /**
+     * Convert json from jira to ripoti.
+     * @param issues
+     * @return RipotiIssue
+     */
     public RipotiIssue convert(Issue[] issues) {
         RipotiIssue ripotiIssue = new RipotiIssue();
         List<ParentIssue> parentIssueList = new ArrayList<>();
