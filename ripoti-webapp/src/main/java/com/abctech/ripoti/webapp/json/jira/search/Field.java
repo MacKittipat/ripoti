@@ -7,6 +7,7 @@ public class Field {
     private String summary;
     @JsonProperty(value = "subtasks")
     private SubTask[] subTasks;
+    private Parent parent;
     @JsonProperty(value = "issuetype")
     private IssueType issueType;
     private String description;
@@ -30,6 +31,14 @@ public class Field {
 
     public void setSubTasks(SubTask[] subTasks) {
         this.subTasks = subTasks;
+    }
+
+    public Parent getParent() {
+        return parent;
+    }
+
+    public void setParent(Parent parent) {
+        this.parent = parent;
     }
 
     public IssueType getIssueType() {
