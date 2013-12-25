@@ -2,15 +2,15 @@ package com.abctech.ripoti.webapp.json.ripoti;
 
 public class BaseIssue {
 
-    private String summary;
+    private String title; // title = [key] summary
     private TimeSpent timeSpent;
 
-    public String getSummary() {
-        return summary;
+    public String getTitle() {
+        return title;
     }
 
-    public void setSummary(String summary) {
-        this.summary = summary;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public TimeSpent getTimeSpent() {

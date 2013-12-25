@@ -34,7 +34,7 @@ public class JiraToRipotiService {
             if(!pIssue.getField().getIssueType().isSubTask()) {
                 log.debug("Parent : {} | {}", pIssue.getField().getSummary(), pIssue.getField().getTimeSpent());
                 ParentIssue parentIssue = new ParentIssue();
-                parentIssue.setSummary(pIssue.getField().getSummary());
+                parentIssue.setTitle(createTitle(pIssue.getKey(), pIssue.getField().getSummary()));
                 int parentTotatTimeSpent = 0;
                 List<ChildIssue> childIssueList = new ArrayList<>();
                 // Child issue.
@@ -44,7 +44,7 @@ public class JiraToRipotiService {
                             cIssue.getField().getParent().getKey().equals(pIssue.getKey())) {
                         log.debug("-- Child : {} | {}", cIssue.getField().getSummary(), cIssue.getField().getTimeSpent());
                         ChildIssue childIssue = new ChildIssue();
-                        childIssue.setSummary(cIssue.getField().getSummary());
+                        childIssue.setTitle(createTitle(cIssue.getKey(), cIssue.getField().getSummary()));
                         TimeSpent cTimeSpent = new TimeSpent();
                         cTimeSpent.setUnit(TIME_SPENT_UNIT);
                         cTimeSpent.setValue(secToHr(cIssue.getField().getTimeSpent()));
@@ -73,5 +73,9 @@ public class JiraToRipotiService {
 
     private double secToHr(int second) {
         return second / 3600.00;
+    }
+
+    private String createTitle(String key, String summary) {
+        return "[" + key + "] " + summary;
     }
 }
