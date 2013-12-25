@@ -1,10 +1,10 @@
 package com.abctech.ripoti.webapp.service;
 
 import com.abctech.ripoti.webapp.json.jira.JiraSession;
-import com.abctech.ripoti.webapp.json.jira.RapidView;
-import com.abctech.ripoti.webapp.json.jira.Sprint;
-import com.abctech.ripoti.webapp.json.jira.SprintQuery;
-import com.abctech.ripoti.webapp.json.jira.View;
+import com.abctech.ripoti.webapp.json.jira.rapidview.RapidView;
+import com.abctech.ripoti.webapp.json.jira.sprintquery.Sprint;
+import com.abctech.ripoti.webapp.json.jira.sprintquery.SprintQuery;
+import com.abctech.ripoti.webapp.json.jira.rapidview.View;
 import com.abctech.ripoti.webapp.json.jira.search.Search;
 import com.abctech.ripoti.webapp.properties.RipotiProperties;
 import org.slf4j.Logger;

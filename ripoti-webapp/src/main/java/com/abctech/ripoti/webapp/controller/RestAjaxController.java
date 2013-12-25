@@ -1,6 +1,6 @@
 package com.abctech.ripoti.webapp.controller;
 
-import com.abctech.ripoti.webapp.json.jira.Sprint;
+import com.abctech.ripoti.webapp.json.jira.sprintquery.Sprint;
 import com.abctech.ripoti.webapp.service.IJiraAuthStorageService;
 import com.abctech.ripoti.webapp.service.JiraRestService;
 import org.springframework.beans.factory.annotation.Autowired;

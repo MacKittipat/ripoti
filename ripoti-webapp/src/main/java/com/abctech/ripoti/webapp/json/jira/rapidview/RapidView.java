@@ -1,4 +1,4 @@
-package com.abctech.ripoti.webapp.json.jira;
+package com.abctech.ripoti.webapp.json.jira.rapidview;
 
 public class RapidView {
 
