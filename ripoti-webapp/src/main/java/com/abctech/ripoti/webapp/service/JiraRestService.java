@@ -85,7 +85,8 @@ public class JiraRestService {
      * @return Search.
      */
     public Search getSearch(String base64Auth, int sprintId) throws HttpClientErrorException {
-        log.debug("Calling rest/api/2/search?jql=...");
+        log.debug("Calling rest/api/2/search" +
+                ripotiProperties.getSearchQuery().replace("{sprintId}", Integer.toString(sprintId)));
         ResponseEntity<Search> response = restTemplate.exchange(
                 ripotiProperties.getSearchUrl(sprintId),
                 HttpMethod.GET,

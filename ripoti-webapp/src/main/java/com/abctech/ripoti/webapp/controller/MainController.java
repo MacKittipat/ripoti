@@ -5,9 +5,12 @@ import com.abctech.ripoti.webapp.form.ReportBuilderForm;
 import com.abctech.ripoti.webapp.json.jira.JiraSession;
 import com.abctech.ripoti.webapp.json.jira.Sprint;
 import com.abctech.ripoti.webapp.json.jira.View;
+import com.abctech.ripoti.webapp.json.jira.search.Search;
 import com.abctech.ripoti.webapp.service.IJiraAuthStorageService;
 import com.abctech.ripoti.webapp.service.JiraRestService;
 import com.abctech.ripoti.webapp.util.Base64Util;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,9 @@ public class MainController {
 
     @Autowired
     private IJiraAuthStorageService jiraAuthStorageService;
+
+    @Autowired
+    private ObjectMapper jacksonObjectMapper;
 
     @RequestMapping(value = {"/", "/index"})
     public String index() {
@@ -66,9 +72,10 @@ public class MainController {
             HttpServletRequest request,
             @ModelAttribute ReportBuilderForm reportBuilderForm) {
         model.addAttribute("pageContent", "main/report");
+        String authValue = jiraAuthStorageService.getAuthorizationValue();
         // Generate viewMap for ddl.
         View[] views = jiraRestService.getViews(
-                jiraAuthStorageService.getAuthorizationValue());
+                authValue);
         Map<String, String> viewMap = new LinkedHashMap<>();
         viewMap.put("0", "Please select");
         for(View view : views) {
@@ -79,7 +86,7 @@ public class MainController {
         if(reportBuilderForm.getViewId() != null) {
             Map<String, String> sprintMap = new LinkedHashMap<>();
             Sprint[] sprints = jiraRestService.getSprints(
-                    jiraAuthStorageService.getAuthorizationValue(),
+                    authValue,
                     reportBuilderForm.getViewId());
             sprintMap.put("0", "Please select");
             for(Sprint sprint : sprints) {
@@ -87,7 +94,12 @@ public class MainController {
             }
             if(reportBuilderForm.getSprintId() != null) {
                 model.addAttribute("sprintMap", sprintMap);
-                // TODO Display report ...
+                Search search = jiraRestService.getSearch(authValue, reportBuilderForm.getSprintId());
+                try {
+                    model.addAttribute("json", jacksonObjectMapper.writeValueAsString(search.getIssues()));
+                } catch (JsonProcessingException e) {
+                    log.warn("Can not convert object to json", e);
+                }
             }
         }
         return "layout";

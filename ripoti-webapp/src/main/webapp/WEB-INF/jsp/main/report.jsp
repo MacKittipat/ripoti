@@ -6,6 +6,9 @@
         <form:select path="sprintId" items="${sprintMap}" />
         <input type="submit" value="Show Report" />
     </form:form>
+    <div>
+        ${json}
+    </div>
 </div>
 <script type="text/javascript">
     $(document).ready(function() {
