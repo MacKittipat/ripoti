@@ -44,4 +44,9 @@ public class MainControllerTest {
             System.out.println("==========");
         }
     }
+
+    @Test
+    public void test2() {
+        System.out.println(Base64Util.encode("user:pass"));
+    }
 }
