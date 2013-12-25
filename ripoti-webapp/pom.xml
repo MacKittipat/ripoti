@@ -108,10 +108,11 @@
                             <name>logback.configurationFile</name>
                             <value>./src/test/resources/logback.xml</value>
                         </systemProperty>
-                        <systemProperty>
+                        <!--<systemProperty>
                             <name>spring.profiles.active</name>
                             <value>development</value>
                         </systemProperty>
+                        -->
                     </systemProperties>
                 </configuration>
             </plugin>
