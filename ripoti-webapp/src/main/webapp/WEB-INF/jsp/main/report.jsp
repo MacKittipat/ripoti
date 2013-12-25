@@ -15,11 +15,13 @@
                 <div style="background-color: lightgray">
                     <span data-bind="text: title"></span>
                     <span data-bind="text: timeSpent.value"></span>
+                    <span data-bind="click: $root.removeParentIssue">&times;</span>
                 </div>
                 <div data-bind="foreach: childIssues">
                     <div>
                         <span data-bind="text: title"></span>
-                        <span data-bind="text: timeSpent.value"></span>
+                        <input type="text" data-bind="value: timeSpent.value, valueUpdate: 'afterkeydown'" />
+                        <span data-bind="click: $root.removeChildIssue.bind($data, $parentContext.$index())">&times;</span>
                     </div>
                 </div>
             </div>
@@ -71,7 +73,7 @@
             var myChildIssues = childIssues();
             var timeSpentValue = 0;
             for(var i=0; i<myChildIssues.length; i++) {
-                timeSpentValue += myChildIssues[i].timeSpent.value();
+                timeSpentValue += parseFloat(myChildIssues[i].timeSpent.value());
             }
             return timeSpentValue;
         }, childIssues);
@@ -93,17 +95,20 @@
             var myParentIssues = self.parentIssues();
             var timeSpentValue = 0;
             for(var i=0; i< myParentIssues.length; i++) {
-                timeSpentValue += myParentIssues[i].timeSpent.value();
+                timeSpentValue += parseFloat(myParentIssues[i].timeSpent.value());
             }
             return timeSpentValue;
         }, self);
 
-        self.removeParentIssue = function() {
-
+        self.removeParentIssue = function(parentIssue) {
+            self.parentIssues.remove(parentIssue);
         }
 
-        self.removeChildIssue = function() {
-
+        self.removeChildIssue = function(parentIssueIndex, childIssue) {
+            self.parentIssues()[parentIssueIndex].childIssues.remove(childIssue);
+            if(self.parentIssues()[parentIssueIndex].childIssues().length == 0) {
+                self.parentIssues.splice(parentIssueIndex, 1);
+            }
         }
     }
 
