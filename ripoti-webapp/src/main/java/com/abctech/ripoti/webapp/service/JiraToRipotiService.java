@@ -5,6 +5,8 @@ import com.abctech.ripoti.webapp.json.ripoti.ChildIssue;
 import com.abctech.ripoti.webapp.json.ripoti.ParentIssue;
 import com.abctech.ripoti.webapp.json.ripoti.RipotiIssue;
 import com.abctech.ripoti.webapp.json.ripoti.TimeSpent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import java.util.List;
 
 @Service
 public class JiraToRipotiService {
+
+    private static final Logger log = LoggerFactory.getLogger(JiraToRipotiService.class);
 
     private static final String TIME_SPENT_UNIT = "hour";
 
@@ -21,12 +25,14 @@ public class JiraToRipotiService {
      * @return RipotiIssue
      */
     public RipotiIssue convert(Issue[] issues) {
+        log.debug("Converting json from jira to ripoti");
         RipotiIssue ripotiIssue = new RipotiIssue();
         List<ParentIssue> parentIssueList = new ArrayList<>();
         int totalTimeSpent = 0;
         for(Issue pIssue : issues) {
             // Parent issue.
             if(!pIssue.getField().getIssueType().isSubTask()) {
+                log.debug("Parent : {} | {}", pIssue.getField().getSummary(), pIssue.getField().getTimeSpent());
                 ParentIssue parentIssue = new ParentIssue();
                 parentIssue.setSummary(pIssue.getField().getSummary());
                 int parentTotatTimeSpent = 0;
@@ -36,6 +42,7 @@ public class JiraToRipotiService {
                     if(cIssue.getField().getIssueType().isSubTask() &&
                             cIssue.getField().getParent() != null &&
                             cIssue.getField().getParent().getKey().equals(pIssue.getKey())) {
+                        log.debug("-- Child : {} | {}", cIssue.getField().getSummary(), cIssue.getField().getTimeSpent());
                         ChildIssue childIssue = new ChildIssue();
                         childIssue.setSummary(cIssue.getField().getSummary());
                         TimeSpent cTimeSpent = new TimeSpent();

@@ -7,7 +7,7 @@
         <input type="submit" value="Show Report" />
     </form:form>
     <div>
-        ${json}
+        ${ripotiJson}
     </div>
 </div>
 <script type="text/javascript">

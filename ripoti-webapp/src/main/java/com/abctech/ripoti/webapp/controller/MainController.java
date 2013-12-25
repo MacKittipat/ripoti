@@ -8,6 +8,7 @@ import com.abctech.ripoti.webapp.json.jira.rapidview.View;
 import com.abctech.ripoti.webapp.json.jira.search.Search;
 import com.abctech.ripoti.webapp.service.IJiraAuthStorageService;
 import com.abctech.ripoti.webapp.service.JiraRestService;
+import com.abctech.ripoti.webapp.service.JiraToRipotiService;
 import com.abctech.ripoti.webapp.util.Base64Util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,6 +36,9 @@ public class MainController {
 
     @Autowired
     private IJiraAuthStorageService jiraAuthStorageService;
+
+    @Autowired
+    private JiraToRipotiService jiraToRipotiService;
 
     @Autowired
     private ObjectMapper jacksonObjectMapper;
@@ -94,9 +98,14 @@ public class MainController {
             }
             if(reportBuilderForm.getSprintId() != null) {
                 model.addAttribute("sprintMap", sprintMap);
+                // Get issues from jira.
                 Search search = jiraRestService.getSearch(authValue, reportBuilderForm.getSprintId());
                 try {
-                    model.addAttribute("json", jacksonObjectMapper.writeValueAsString(search.getIssues()));
+                    // Convert json from jira to ripoti.
+                    model.addAttribute(
+                            "ripotiJson",
+                            jacksonObjectMapper.writeValueAsString(
+                                    jiraToRipotiService.convert(search.getIssues())));
                 } catch (JsonProcessingException e) {
                     log.warn("Can not convert object to json", e);
                 }
