@@ -10,6 +10,12 @@
         ${ripotiJson}
     </div>
     <div>
+        <form id="frmExportPdf" action="<spring:url value='/export/pdf' />" onsubmit="exportFile('frmExportPdf')" method="post">
+            <input type="hidden" id="ripotiIssueJson" name="ripotiIssueJson" />
+            <input type="submit" value="PDF" />
+        </form>
+    </div>
+    <div>
         <div data-bind="foreach: parentIssues">
             <div>
                 <div style="background-color: lightgray">
@@ -114,4 +120,9 @@
 
     var ripotiIssue = new RipotiIssue();
     ko.applyBindings(ripotiIssue);
+
+    function exportFile(frmId) {
+        var ripotiIssueJson = ko.toJSON(ripotiIssue)
+        $("#" + frmId + " #ripotiIssueJson").val(ripotiIssueJson);
+    }
 </script>
