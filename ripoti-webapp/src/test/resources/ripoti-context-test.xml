@@ -36,6 +36,13 @@
         </property>
     </bean>
 
+    <!-- Freemarker -->
+    <bean id="freeMarkerConfigurationFactory" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactory">
+        <property name="templateLoaderPath" value="classpath:template"/>
+        <property name="preferFileSystemAccess" value="false"/>
+        <property name="defaultEncoding" value="utf-8"/>
+    </bean>
+
     <bean id="jiraAuthStorageService" class="com.abctech.ripoti.webapp.service.JiraAuthSessionStorageService" />
 
 </beans>
