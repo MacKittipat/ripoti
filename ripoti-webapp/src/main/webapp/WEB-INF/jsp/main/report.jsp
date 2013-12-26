@@ -17,7 +17,7 @@
     <article>
         <div class="grid grid-pad">
             <div class="col-1-1" style="text-align: center; padding-top: 10px;">
-                <span class="title">We will generate <strong>Time Spend Report</strong> for you. Just follow the step :)</span>
+                <span class="title"><strong>ripoti</strong> will generate <strong>Time Spend Report</strong> for you. Just follow the steps :)</span>
             </div>
         </div>
 
@@ -97,25 +97,27 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Delete</th>
+
                                 <th>Task</th>
                                 <th>Detail</th>
                                 <th>Time</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody data-bind="foreach: childIssues">
                                 <tr>
-                                    <td><img src="/assets/image/icon-del.gif" alt="Delete Icon" class="del-row" data-bind="click: $root.removeChildIssue.bind($data, $parentContext.$index())"/></td>
                                     <td>BT-2293</td>
-                                    <td><span data-bind="text: F"></span></td>
+                                    <td><span data-bind="text: title"></span></td>
                                     <td><input type="text" data-bind="value: timeSpent.value, valueUpdate: 'afterkeydown'" /></td>
+                                    <td><img src="/assets/image/icon-del.gif" alt="Delete Icon" class="del-row" data-bind="click: $root.removeChildIssue.bind($data, $parentContext.$index())"/></td>
+
                                 </tr>
 
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="3">Total</td>
-                                <td><span data-bind="text: timeSpent.value"></span></td>
+                                <td colspan="2">Total</td>
+                                <td colspan="2"><span data-bind="text: timeSpent.value"></span></td>
                             </tr>
                         </tfoot>
                     </table>
@@ -141,9 +143,8 @@
         </div>
     </div>
 
-
-
 </section>
+<a name="go-down"></a>
 
 <section>
 <form id="frmExportPdf" action="<spring:url value='/export/pdf' />" onsubmit="exportFile('frmExportPdf')" method="post">
@@ -154,16 +155,16 @@
             </div>
             <div class="col-1-3">
                 <div class="convert-box">
-                    <p>Convert file to:</p><br/>
+                    <p>Convert file to:</p>
                         <div class="col-3">
                             <input type="hidden" id="ripotiIssueJson" name="ripotiIssueJson" />
                             <input type="submit" value="PDF" />
                         </div>
                         <div class="col-3">
-                            <input type="button" value="Excel"/>
+                            <input type="submit" value="Excel"/>
                         </div>
                         <div class="col-3">
-                            <input type="button" value="CSV"/>
+                            <input type="submit" value="CSV"/>
                         </div>
 
                 </div>
@@ -171,6 +172,8 @@
     </div>
 </form>
 </section>
+<a href="#go-down" class="go-down">Convert and Download</a>
+
 </c:if>
 
 <footer>

@@ -6,9 +6,10 @@ header span.project-name{font-family:"Neometric-Medium",Arial;margin-left:10px;t
 .msg-box{position:relative;background:#eeeeee;padding-bottom:20px;margin-bottom:20px;z-index:1;}.msg-box select,.msg-box input{margin-left:-10px;}
 .msg-box:after{top:100%;left:50%;border:solid transparent;content:" ";height:0;width:0;position:absolute;pointer-events:none;border-color:rgba(224, 224, 224, 0);border-top-color:#eeeeee;border-width:20px;margin-left:-20px;}
 .login-bg{background:#205081 !important;margin:0px;padding:0px;width:100%;height:100%;}
-.login-box{width:340px;height:240px;padding:20px;background:#ffffff;display:table-cell;position:absolute;left:50%;top:50%;margin-top:-130px;margin-left:-170px;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-webkit-box-shadow:0 0 0 5px rgba(0, 0, 0, 0.2);box-shadow:0 0 0 5px rgba(0, 0, 0, 0.2);font-size:30px;}.login-box .login-logo{position:absolute;top:-40px;}
+.login-box{width:340px;height:210px;padding:20px;background:#ffffff;display:table-cell;position:absolute;left:50%;top:50%;margin-top:-115px;margin-left:-170px;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-webkit-box-shadow:0 0 0 5px rgba(0, 0, 0, 0.2);box-shadow:0 0 0 5px rgba(0, 0, 0, 0.2);font-size:30px;}.login-box .login-logo{position:absolute;top:-40px;}
+.login-box .error-msg{position:absolute;top:230px;background:red;color:#ffffff;font-size:16px;width:100%;padding:10px 20px;margin-left:-20px;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-webkit-box-shadow:0 0 0 5px rgba(0, 0, 0, 0.2);box-shadow:0 0 0 5px rgba(0, 0, 0, 0.2);}
 .login-box header{background:#ffffff;color:#808080;box-shadow:none;margin:0px !important;margin-top:-10px;}.login-box header span.project-name{top:0px;margin-left:0px;border:none;background:inherit;box-shadow:none;font-size:inherit;padding:0px;}
-.login-box input{margin-bottom:10px !important;}
+.login-box input{margin-bottom:12px !important;}
 .login-box span{font-family:"Neometric-Medium",Arial;text-shadow:1px 1px 0px rgba(0, 0, 0, 0.3);}
 .login-box span.project-name{color:#205081;}
 .grid input{margin-top:10px;}
@@ -30,7 +31,7 @@ label:hover:before{background:#e0e0e0;}
 table{width:100%;margin-top:10px;margin-bottom:10px;cell-spacing:0px;}table td:first-child,table th:first-child{width:100px;}
 table td:nth-child(3),table th:nth-child(3){width:150px;}
 table td:last-child,table th:last-child{width:60px;text-align:right;}
-table thead th{padding:7px;text-align:left;border-bottom:1px solid #eeeeee;}
+table thead th{padding:7px;text-align:left;border-bottom:1px solid #eeeeee;font-weight:bold;}
 table tbody td{padding:7px;}
 table tfoot td{padding:7px;border-top:1px solid #eeeeee;}
 table tfoot td:first-child{font-weight:bold;text-align:center;}
