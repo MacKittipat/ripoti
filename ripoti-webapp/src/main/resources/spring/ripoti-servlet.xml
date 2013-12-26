@@ -20,7 +20,11 @@
 
     <!-- Interceptors -->
     <mvc:interceptors>
-        <bean class="com.abctech.ripoti.webapp.interceptor.MainInterceptor" />
+        <mvc:interceptor>
+            <mvc:mapping path="/report" />
+            <mvc:mapping path="/export/**" />
+            <bean class="com.abctech.ripoti.webapp.interceptor.JiraAuthInterceptor" />
+        </mvc:interceptor>
     </mvc:interceptors>
 
     <!-- Jackson -->
