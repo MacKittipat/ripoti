@@ -10,7 +10,7 @@
 <script type="text/javascript">
     less.watch(); //less start
 </script>
-
+<script type="text/javascript" src="jquery-1.10.1.js"></script>
 
 </head>
 <body>
@@ -51,9 +51,10 @@
     <div class="grid grid-pad">
         <div class="col-1-1">
             <span>Story: </span><span class="vip-color">BT-2286 Classified - Cleanupjob ads</span><br/>
-            <table>
+            <table id="datatable1">
                 <thead>
                     <tr>
+                        <th><img src="icon-del.gif" alt="Icon Delete"/></th>
                         <th>Task</th>
                         <th>Detail</th>
                         <th>Time</th>
@@ -61,16 +62,19 @@
                 </thead>
                 <tbody>
                     <tr>
+                        <td><input type="checkbox" name="chk"/></td>
                         <td>BT-2293</td>
                         <td>Classified - Cleanupjob images</td>
                         <td>5h</td>
                     </tr>
                     <tr>
+                        <td><input type="checkbox" name="chk"/></td>
                         <td>BT-2299</td>
                         <td>Create DAO and Manager on Zett library to clean up ads</td>
                         <td>6h</td>
                     </tr>
                     <tr>
+                        <td><input type="checkbox" name="chk"/></td>
                         <td>BT-2300</td>
                         <td>Create component on transition for calling zett library to cleanup ads</td>
                         <td>3h</td>
@@ -78,12 +82,23 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td>a</td>
-                        <td>b</td>
+                        <td><input type="button" value="Del" id="btn-del" class="btn-in-tbl"/></td>
+                        <td colspan="2">TOTAL</td>
                         <td>2d2h</td>
                     </tr>
                 </tfoot>
             </table>
+            
+            <script type="text/javascript">
+                $( document ).ready(function() {
+                    $("#btn-del").click(function(){
+                        if (!confirm("Do you want to delete")){
+                        return false;
+                        }
+                        $("table tr input:checked").parents('tr').remove();
+                    });
+                });
+            </script>
             
             
         </div>
@@ -116,8 +131,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td>a</td>
-                        <td>b</td>
+                        <td colspan="2">TOTAL</td>
                         <td>2d</td>
                     </tr>
                 </tfoot>

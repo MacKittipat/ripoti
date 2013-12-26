@@ -201,10 +201,20 @@ table {
     border: 1px solid #eeeeee;
     .border-radius(3px);
     
+        td:last-child, th:last-child {
+            background: #eef6ff;
+            color: @default-theme-color;
+            width: 100px;
+        }
+        td:first-child, th:first-child {
+            width: 50px;
+            text-align: center;
+        }
+    
     thead {
         background: #f5f5f5;
         th {
-            padding: 5px;
+            padding: 10px 5px;
             text-align: left;
         }   
     }
@@ -218,6 +228,13 @@ table {
             border-top: 1px solid #eeeeee;
             padding: 5px;
         }
+        td:nth-child(2) {
+            font-weight: bold;
+            text-align: center;
+        }
+        td:last-child {
+            font-weight: bold;
+        }
     }
 }
 span.title {
@@ -226,4 +243,12 @@ span.title {
 }
 span.vip-color {
     color: @default-theme-color;
+}
+#btn-del {
+    background: #c0c0c0;
+    margin: 0px !important;
+     padding: 2px;
+}
+#btn-del:hover {
+    background: #d0d0d0;
 }

@@ -1,5 +1,32 @@
 /* CSS crunched with Crunch - http://crunchapp.net/ */
-body{background:#ffffff;color:#555;margin:0px;padding:0px;font-family:'trebuchet ms',Arial}
-header{background:#205081;color:#ffffff}
+body{background:#ffffff;color:#555;margin:0px;padding:0px;font-family:"Arial"}
+header{background:#205081;color:#ffffff;margin-bottom:0px;-webkit-box-shadow:0 1px 2px rgba(0,0,0,0.5);-moz-box-shadow:0 1px 2px rgba(0,0,0,0.5);box-shadow:0 1px 2px rgba(0,0,0,0.5);z-index:2;position:relative}header .grid{padding-top:5px;height:40px}
+header span.project-name{font-family:"Neometric-Medium",Arial;margin-left:10px;top:-10px;position:relative}
+.msg-box{position:relative;background:#eeeeee;padding-bottom:20px;margin-bottom:20px;z-index:1}
+.msg-box:after{top:100%;left:50%;border:solid transparent;content:" ";height:0;width:0;position:absolute;pointer-events:none;border-color:rgba(224,224,224,0);border-top-color:#eeeeee;border-width:20px;margin-left:-20px}
 .login-bg{background:#205081;margin:0px;padding:0px;width:100%;height:100%}
-.login-box{width:300px;height:200px;padding:20px;background:#ffffff;display:table-cell;position:absolute;left:50%;top:50%;margin-top:-100px;margin-left:-100px;border-radius:5px;-webkit-box-shadow:0 0 0 5px rgba(0,0,0,0.2);box-shadow:0 0 0 5px rgba(0,0,0,0.2);font-size:30px}.login-box .login-logo{position:absolute;top:-50px}
+.login-box{width:300px;height:200px;padding:20px;background:#ffffff;display:table-cell;position:absolute;left:50%;top:50%;margin-top:-100px;margin-left:-100px;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;-webkit-box-shadow:0 0 0 5px rgba(0,0,0,0.2);box-shadow:0 0 0 5px rgba(0,0,0,0.2);font-size:30px}.login-box .login-logo{position:absolute;top:-40px}
+.login-box header{background:#ffffff;color:#555}
+.login-box span{font-family:"Neometric-Medium",Arial;text-shadow:1px 1px 0 rgba(0,0,0,0.3)}
+.login-box span.project-name{color:#205081}
+.grid input{margin-top:10px}
+input{width:100%;font-size:18px;margin-bottom:20px;font-family:Arial;background:#eef6ff;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;box-shadow:none;border:none;padding:5px;border:1px solid #ddedff}
+input[type=button]{background:#205081;border:0;padding:5px;color:#ffffff;text-shadow:2px 2px 0 rgba(0,0,0,0.5)}
+input[type=button]:hover{background:#4272a3}
+select{padding:5px;margin:0;font-family:"Helvetica Neue",Arial;font-size:18px;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 3px 0 #ccc,0 -1px #fff inset;-moz-box-shadow:0 3px 0 #ccc,0 -1px #fff inset;box-shadow:0 3px 0 #ccc,0 -1px #fff inset;background:#f8f8f8;color:#555555;border:none;outline:none;display:inline-block;-webkit-appearance:none;-moz-appearance:none;appearance:none;cursor:pointer;margin-top:10px}
+@media screen and (-webkit-min-device-pixel-ratio:0){select{padding-right:18px}}label{position:relative}
+label:after{content:url(arrow-down.png);color:#fff;right:8px;top:5px;padding:0px;position:absolute;pointer-events:none}
+label:before{content:'';right:0px;top:-8px;width:20px;height:33px;background:#d0d0d0;position:absolute;pointer-events:none;display:block}
+label:hover:before{background:#e0e0e0}
+.num-round{-moz-border-radius:30px;border-radius:30px;padding:15px;text-align:center;font-size:24px;color:#205081;background:#eef6ff;width:60px}
+table{width:100%;margin-top:10px;margin-bottom:20px;border:1px solid #eeeeee;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px}table td:last-child,table th:last-child{background:#eef6ff;color:#205081;width:100px}
+table td:first-child,table th:first-child{width:50px;text-align:center}
+table thead{background:#f5f5f5}table thead th{padding:10px 5px;text-align:left}
+table tbody td{padding:5px}
+table tfoot td{border-top:1px solid #eeeeee;padding:5px}
+table tfoot td:nth-child(2){font-weight:bold;text-align:center}
+table tfoot td:last-child{font-weight:bold}
+span.title{text-align:center;font-size:24px}
+span.vip-color{color:#205081}
+#btn-del{background:#c0c0c0}
+.btn-in-tbl{margin:0px}
