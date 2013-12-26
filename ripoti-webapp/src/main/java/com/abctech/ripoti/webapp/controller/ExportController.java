@@ -1,13 +1,15 @@
 package com.abctech.ripoti.webapp.controller;
 
-import com.abctech.ripoti.webapp.json.ripoti.ParentIssue;
 import com.abctech.ripoti.webapp.json.ripoti.RipotiIssue;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lowagie.text.DocumentException;
+import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.freemarker.FreeMarkerConfigurationFactory;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +17,8 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "export")
@@ -25,30 +29,42 @@ public class ExportController {
     @Autowired
     private ObjectMapper jacksonObjectMapper;
 
+    @Autowired
+    private FreeMarkerConfigurationFactory freeMarkerConfigurationFactory;
+
     @RequestMapping(value = "pdf",  produces = "application/pdf")
     @ResponseBody
     public byte[] pdf(@RequestParam String ripotiIssueJson) {
-        // Convert json to java
+        String content = "";
         try {
+            // Convert json to java object.
+            log.debug("Converting json to object.");
             RipotiIssue ripotiIssue = jacksonObjectMapper.readValue(ripotiIssueJson, RipotiIssue.class);
-            for(ParentIssue parentIssue : ripotiIssue.getParentIssues()) {
-                log.debug("Parent : {} | {}", parentIssue.getTitle(), parentIssue.getTimeSpent().getValue());
+            try {
+                // Load PDF content.
+                Map<String, Object> ftlParamMap = new LinkedHashMap<>();
+                ftlParamMap.put("ripotiIssue", ripotiIssue);
+                content = FreeMarkerTemplateUtils.processTemplateIntoString(
+                        freeMarkerConfigurationFactory.createConfiguration().getTemplate("pdf.ftl"),
+                        ftlParamMap);
+            } catch (IOException | TemplateException e) {
+                log.error("Can not load pdf template.", e);
             }
-            // TODO Display pdf ...
         } catch (IOException e) {
-            log.warn("Can not convert json to object.", e);
+            log.error("Can not convert json to object.", e);
         }
-
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        ITextRenderer renderer = new ITextRenderer();
-        renderer.setDocumentFromString("<html><body>Hello</body></html>");
-        renderer.layout();
+        // Render PDF
+        log.info("Rendering PDF");
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        ITextRenderer iTextRenderer = new ITextRenderer();
+        iTextRenderer.setDocumentFromString(content);
+        iTextRenderer.layout();
         try {
-            renderer.createPDF(output);
+            iTextRenderer.createPDF(byteArrayOutputStream);
         } catch (DocumentException e) {
-            e.printStackTrace();
+            log.error("Can not create pdf.", e);
         }
-        byte[] content = output.toByteArray();
-        return content;
+        byte[] contentBytes = byteArrayOutputStream.toByteArray();
+        return contentBytes;
     }
 }
