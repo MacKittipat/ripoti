@@ -58,7 +58,11 @@ header {
     background: #eeeeee;
     padding-bottom: 20px;
     margin-bottom: 20px;
-    z-index: 1;
+    z-index: 1; 
+    
+    select, input {
+        margin-left: -10px;
+    }
 }
 .msg-box:after {
     top: 100%; 
@@ -173,10 +177,11 @@ select {
     border: 1px solid #f0f0f0;
     .border-radius(2px);
 }
+
 .arrow-select {
     width: 22px; height: 100%; float: right; 
     background: #e0e0e0 url('arrow-down.png') no-repeat center; 
-    display: block; position: absolute; right: 0px; top: 0px;
+    display: block; position: absolute; right: 10px; top: 0px;
     .border-radius(2px);
 }
 .arrow-select:hover {
@@ -192,7 +197,7 @@ select.cute-ui {
     -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
     box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
     background: #ffffff;
-    border: 1px solid #f8f8f8;
+    border: 1px solid #f8f8f8 !important;
     color:#555555 !important;
     display: inline-block;
     -webkit-appearance:none;
@@ -200,6 +205,7 @@ select.cute-ui {
     appearance:none;
     cursor:pointer;
     margin-top: 10px;
+    
 }
 
 /* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
@@ -246,7 +252,11 @@ label:hover:before {
     .border-radius(3px);
     .story-name {
         background: @second-theme-color;
-        padding: 10px;
+        padding: 10px 15px;
+        img.del-row {
+            float: right;
+            margin-top: 3px;
+        }
     }
     .task-table {
         padding: 10px;
@@ -258,13 +268,14 @@ table {
     margin-bottom: 10px;
     cell-spacing: 0px;
     td:first-child, th:first-child {
-        width: 60px;
-    }
-    td:nth-child(2), th:nth-child(2) {
         width: 100px;
     }
+    td:nth-child(3), th:nth-child(3) {
+        width: 150px;
+    }
     td:last-child, th:last-child {
-        width: 130px;
+        width: 60px;
+        text-align: right;
     }
     
     
@@ -274,6 +285,7 @@ table {
             padding: 7px;
             text-align: left;
             border-bottom: 1px solid #eeeeee;
+            font-weight: bold;
         }   
     }
     tbody {
@@ -292,6 +304,7 @@ table {
         }
         td:last-child {
             font-weight: bold;
+            text-align: left !important;
         }
     }
 }
@@ -312,7 +325,7 @@ table {
     }
     span:last-child {
         float: right;
-        width: 150px;
+        width: 220px;
         padding: 7px;
         font-weight: bold;
     }
@@ -324,11 +337,12 @@ table {
     width: 100%;
     padding: 17px 10px;
     .border-radius(3px);
-    input[type=button] {
+    input[type=submit] {
         margin: 0px;
     }
     p {
         margin: 0px;
+        padding-bottom: 10px;
         font-weight: bold;
     }
 }
@@ -348,6 +362,39 @@ span.vip-color {
 
 .del-row {
     cursor: pointer;
+}
+img.del-row {
+    filter: grayscale(0%);
+    -webkit-filter: grayscale(0%);  /* For Webkit browsers */
+    filter: none;  /* For IE 6 - 9 */
+        filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale");
+
+}
+img.del-row:hover {
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);  /* For Webkit browsers */
+    filter: gray;  /* For IE 6 - 9 */
+    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */
+}
+
+.go-down {
+    width: 50px;
+    height: 50px;
+    display: inline;
+    background: yellow;
+    position: fixed;
+    right: 0px;
+    top: 50%;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+transition:width 1s linear 0s;
+/* Safari */
+-webkit-transition:width 1s linear 0s;
+}
+.go-down:hover {
+    width: 200px;
 }
 
 footer {

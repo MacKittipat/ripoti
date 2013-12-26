@@ -68,8 +68,9 @@
                 </div>
 
             </div>
-        </form:form>
+
         </div>
+        </form:form>
     </article>
 </section>
 
@@ -106,7 +107,7 @@
                                 <tr>
                                     <td><img src="/assets/image/icon-del.gif" alt="Delete Icon" class="del-row" data-bind="click: $root.removeChildIssue.bind($data, $parentContext.$index())"/></td>
                                     <td>BT-2293</td>
-                                    <td><span data-bind="text: title"></span></td>
+                                    <td><span data-bind="text: F"></span></td>
                                     <td><input type="text" data-bind="value: timeSpent.value, valueUpdate: 'afterkeydown'" /></td>
                                 </tr>
 
