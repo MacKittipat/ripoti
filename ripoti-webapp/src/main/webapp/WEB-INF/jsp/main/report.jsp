@@ -1,5 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <div>
     <form:form commandName="reportBuilderForm" method="get">
         <form:select path="viewId" items="${viewMap}" />
@@ -15,28 +16,30 @@
             <input type="submit" value="PDF" />
         </form>
     </div>
-    <div>
-        <div data-bind="foreach: parentIssues">
-            <div>
-                <div style="background-color: lightgray">
-                    <span data-bind="text: title"></span>
-                    <span data-bind="text: timeSpent.value"></span>
-                    <span data-bind="click: $root.removeParentIssue">&times;</span>
-                </div>
-                <div data-bind="foreach: childIssues">
-                    <div>
+    <c:if test="${ripotiJson != null}">
+        <div>
+            <div data-bind="foreach: parentIssues">
+                <div>
+                    <div style="background-color: lightgray">
                         <span data-bind="text: title"></span>
-                        <input type="text" data-bind="value: timeSpent.value, valueUpdate: 'afterkeydown'" />
-                        <span data-bind="click: $root.removeChildIssue.bind($data, $parentContext.$index())">&times;</span>
+                        <span data-bind="text: timeSpent.value"></span>
+                        <span data-bind="click: $root.removeParentIssue">&times;</span>
+                    </div>
+                    <div data-bind="foreach: childIssues">
+                        <div>
+                            <span data-bind="text: title"></span>
+                            <input type="text" data-bind="value: timeSpent.value, valueUpdate: 'afterkeydown'" />
+                            <span data-bind="click: $root.removeChildIssue.bind($data, $parentContext.$index())">&times;</span>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div style="background-color: darkgrey">
+                <span>Total</span>
+                <span data-bind="text: timeSpent.value"></span>
+            </div>
         </div>
-        <div style="background-color: darkgrey">
-            <span>Total</span>
-            <span data-bind="text: timeSpent.value"></span>
-        </div>
-    </div>
+    </c:if>
 </div>
 <div>
 
@@ -54,6 +57,7 @@
         });
     });
 
+    <c:if test="${ripotiJson != null}">
     // Binding Ripoti json with html
     var ripotiJson = ${ripotiJson};
 
@@ -125,4 +129,5 @@
         var ripotiIssueJson = ko.toJSON(ripotiIssue)
         $("#" + frmId + " #ripotiIssueJson").val(ripotiIssueJson);
     }
+    </c:if>
 </script>
