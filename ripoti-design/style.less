@@ -15,7 +15,7 @@ body {
     color: @default-text-color;
     margin: 0px;
     padding: 0px;
-    font-family: "Arial";
+    font-family: "Arial" !important;
     }
 
 header {
@@ -76,7 +76,7 @@ header {
 }
 
 .login-bg {
-    background: @default-theme-color;
+    background: @default-theme-color !important;
     margin: 0px;
     padding: 0px;
     width: 100%;
@@ -84,8 +84,8 @@ header {
 }
 
 .login-box {
-    width: 300px;
-    height: 200px;
+    width: 340px;
+    height: 240px;
     padding: 20px;
     background: #ffffff;
     display: table-cell;
@@ -108,7 +108,8 @@ header {
         background: #ffffff;
         color: @default-text-color;
         box-shadow: none;
-        margin-bottom: 20px;
+        margin: 0px !important;
+        margin-top: -10px;
         span.project-name {
             top: 0px;
             margin-left: 0px;
@@ -118,6 +119,9 @@ header {
             font-size: inherit;
             padding: 0px;
         }
+    }
+    input {
+        margin-bottom: 10px !important;
     }
     
     span {
@@ -150,14 +154,14 @@ input {
 input[type=text], input[type=password] {
     color: @default-theme-color;
 }
-input[type=button] {
+input[type=button],input[type=submit] {
     background: @default-theme-color;
     border: 0;
     padding: 5px;
     color: #ffffff;
     text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
 }
-input[type=button]:hover {
+input[type=button]:hover,input[type=submit]:hover {
     background: @hover-theme-color;
 }
 select {
@@ -171,26 +175,25 @@ select {
 }
 .arrow-select {
     width: 22px; height: 100%; float: right; 
-    background: #f0f0f0 url('arrow-down.png') no-repeat center; 
+    background: #e0e0e0 url('arrow-down.png') no-repeat center; 
     display: block; position: absolute; right: 0px; top: 0px;
     .border-radius(2px);
 }
 .arrow-select:hover {
-    background: #e0e0e0 url('arrow-down.png') no-repeat center; 
+    background: #d5d5d5 url('arrow-down.png') no-repeat center; 
 }
 select.cute-ui {
     padding:5px;
     margin: 0;
     font-family: @default-font;
     font-size: 18px;
-    .border-radius(3px);
+    .border-radius(3px) !important;
     -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
     -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
     box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
-    background: #f8f8f8;
-    color:#555555;
-    border:none;
-    outline:none;
+    background: #ffffff;
+    border: 1px solid #f8f8f8;
+    color:#555555 !important;
     display: inline-block;
     -webkit-appearance:none;
     -moz-appearance:none;
@@ -231,11 +234,11 @@ label:hover:before {
     {
         -moz-border-radius: 30px;
         border-radius: 30px;
-        padding: 15px;
+        padding: 10px;
         text-align: center;
         font-size: 24px;
-        color: @default-theme-color;
-        background: #eef6ff;
+        color: #555555;
+        background: #e0e0e0 !important;
         width: 60px;
     }
 .story-box {
@@ -336,6 +339,8 @@ table {
 span.title {
     text-align: center;
     font-size: 24px;
+    color: #555555;
+    margin-top: 10px;
 }
 span.vip-color {
     color: @default-theme-color;

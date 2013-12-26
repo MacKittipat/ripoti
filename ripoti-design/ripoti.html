@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <html>
 <head>
 <!--<link rel="stylesheet/css" type="text/css" href="style.css" />-->
@@ -5,9 +7,10 @@
 
 <link type="text/css" rel="stylesheet/less" href="style.less" />
 <link type="text/css" rel="stylesheet" href="reset.css" />
-<link type="text/css" rel="stylesheet" href="simplegrid.css" />
 
+<link type="text/css" rel="stylesheet" href="simplegrid.css" />
 <link rel="stylesheet" href="style.css">
+<script type="text/javascript" src="jquery-1.10.1.js"></script>
 <script type="text/javascript" src="less-1.5.1.js"></script>
 <script type="text/javascript">
     less.watch(); //less start
@@ -15,7 +18,7 @@
 <style type="text/css" media="screen">
 /*<![CDATA[*/@import 'stylesheet.css';/*]]>*/
 </style>
-<script type="text/javascript" src="jquery-1.10.1.js"></script>
+
 </head>
 <body>
 
@@ -29,20 +32,91 @@
     
 </header>
     
-<section class="title-box">
+<section class="msg-box">
     <article>
         <div class="grid grid-pad">
-            <div class="col-1-1">
-                <span class="title">Time spent Report</span>
-            </div>
+        <div class="col-1-1" style="text-align: center; padding-top: 10px;">
+        <span class="title">We will generate <strong>Time Spend Report</strong> for you. Just follow the step :)</span>
         </div>
+        </div>
+        
+        <div class="grid grid-pad">
+        <div class="col-4-12">
+            
+            <div class="col-3-12">
+            <div class="num-round">
+            1
+            </div>
+            </div>
+            <div class="col-9-12" style="padding-top: 10px;">
+                
+                <!--<label>
+                <select class="cute-ui">
+                    <option>ABC Tech Thailand Classified</option>
+                    <option>ABC Tech Thailand DevOps</option>
+                    <option>ABC Tech Thailand Saxo</option>
+                    <option>ABC Tech Thailand SSO</option>
+                </select>
+                </label>-->
+                <div  style="position: relative;">
+                <select>
+                    <option>ABC Tech Thailand Classified</option>
+                    <option>ABC Tech Thailand DevOps</option>
+                    <option>ABC Tech Thailand Saxo</option>
+                    <option>ABC Tech Thailand SSO</option>
+                </select>
+                <div class="arrow-select">&nbsp;</div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="col-4-12">
+            
+            <div class="col-3-12">
+            <div class="num-round">
+            2
+            </div>
+            </div>
+            <div class="col-9-12" style="padding-top: 10px;">
+                <!--<label>
+                <select class="cute-ui">
+                    <option>Sprint 1</option>
+                    <option>Sprint 2</option>
+                    <option>Sprint 3</option>            
+                </select>
+                </label>-->
+                <div  style="position: relative;">
+                <select>
+                    <option>Sprint 1</option>
+                    <option>Sprint 2</option>
+                    <option>Sprint 3</option> 
+                               
+                </select>
+                <div class="arrow-select">&nbsp;</div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="col-4-12">
+            
+            <div class="col-3-12">
+            <div class="num-round">
+            3
+            </div>
+            </div>
+            <div class="col-9-12">
+                <input type="button" value="View Report" style="width: 100%;" />
+            </div>
+            
+        </div>
+    </div>   
     </article>
 </section>
     
 <section> 
-    
-	
-        <div class="grid grid-pad">
+     <div class="grid grid-pad">
             <div class="col-1-2">
                 
                 <span>Board: </span><span class="vip-color">ABC Tech Thailand Classified</span>
@@ -163,7 +237,7 @@
         		<span>123h</span>
         	</div>
         </div>
-        </div>
+        </div> 
 
 
 </section>
@@ -190,9 +264,9 @@
         </div>
 </div>
 </section>
-
+   
 <footer>
-<!--    
+ <!--
     <div class="grid grid-pad">
         <div class="col-1-1">
         Created by Amedia/Bangkok
@@ -217,6 +291,5 @@ $(document).ready(function(){
 });
 
 </script>
-
 </body>
 </html>
