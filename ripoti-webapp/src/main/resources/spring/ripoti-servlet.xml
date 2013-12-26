@@ -18,7 +18,16 @@
     <context:component-scan base-package="com.abctech.ripoti.webapp.service" />
     <context:component-scan base-package="com.abctech.ripoti.webapp.properties" />
 
+    <!-- Interceptors -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/report" />
+            <mvc:mapping path="/export/**" />
+            <bean class="com.abctech.ripoti.webapp.interceptor.JiraAuthInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 
+    <!-- Jackson -->
     <bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetObject" ref="jacksonObjectMapper" />
@@ -35,6 +44,7 @@
         <property name="objectMapper" ref="jacksonObjectMapper" />
     </bean>
 
+    <!-- RestTemplate -->
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
         <property name="messageConverters">
             <list>
