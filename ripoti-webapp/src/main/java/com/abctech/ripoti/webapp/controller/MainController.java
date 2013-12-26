@@ -51,9 +51,6 @@ public class MainController {
     @RequestMapping(value = "auth")
     public String auth(Model model, HttpServletRequest request, @ModelAttribute AuthForm authForm) {
         model.addAttribute("pageContent", "main/auth");
-        if(jiraAuthStorageService.getAuthorizationValue() != null) {
-            return "redirect:report";
-        }
         if(RequestMethod.POST.toString().equals(request.getMethod())) {
             log.info("User {} is authenticating for Jira's REST service", authForm.getUsername());
             try {
@@ -62,6 +59,10 @@ public class MainController {
                 log.debug(jiraSession.toString());
                 request.getSession().setAttribute("authorization", base64Auth);
                 log.info("Authentication success");
+                if(jiraAuthStorageService.getAuthorizationValue() != null) {
+                    log.info("Redirecting to report page");
+                    return "redirect:report";
+                }
             } catch (HttpClientErrorException e) {
                 log.warn("Authentication fail", e);
                 model.addAttribute("errorMsg", "Authentication fail, Username or Password is not correct.");
