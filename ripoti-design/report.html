@@ -10,8 +10,10 @@
 <script type="text/javascript">
     less.watch(); //less start
 </script>
+<style type="text/css" media="screen">
+/*<![CDATA[*/@import 'stylesheet.css';/*]]>*/
+</style>
 <script type="text/javascript" src="jquery-1.10.1.js"></script>
-
 </head>
 <body>
 
@@ -19,27 +21,17 @@
 
     <div class="grid grid-pad">
         <div class="col-1-1">
-        <img src="amedia-logo-transparent.png" alt="Amedia Logo"/><span class="project-name">Ripoti</span>
+        <img src="amedia-logo-transparent.png" alt="Amedia Logo"/><span class="project-name">ripoti</span>
         </div>
     </div>
     
 </header>
     
-<section>
+<section class="title-box">
     <article>
         <div class="grid grid-pad">
             <div class="col-1-1">
                 <span class="title">Time spent Report</span>
-            </div>
-        </div>
-        <div class="grid grid-pad">
-            <div class="col-1-2">
-                
-                <span>Board: </span><span class="vip-color">ABC Tech Thailand Classified</span>
-            </div>
-            <div class="col-1-2">
-                
-                <span>Sprint: </span><span class="vip-color">Sprint-Classified-45</span>
             </div>
         </div>
     </article>
@@ -47,14 +39,31 @@
     
 <section> 
     
-
+	
+        <div class="grid grid-pad">
+            <div class="col-1-2">
+                
+                <span>Board: </span><span class="vip-color">ABC Tech Thailand Classified</span>
+            </div>
+            <div class="col-1-2" style="text-align: right;">
+                
+                <span>Sprint: </span><span class="vip-color">Sprint-Classified-45</span>
+            </div>
+        </div>
+        
+        
     <div class="grid grid-pad">
         <div class="col-1-1">
+        
+        <div class="story-box">
+        	<div class="story-name">
             <span>Story: </span><span class="vip-color">BT-2286 Classified - Cleanupjob ads</span><br/>
-            <table id="datatable1">
+            </div>
+            <div class="task-table">
+            <table>
                 <thead>
                     <tr>
-                        <th><img src="icon-del.gif" alt="Icon Delete"/></th>
+                    	<th>Delete</th>
                         <th>Task</th>
                         <th>Detail</th>
                         <th>Time</th>
@@ -62,19 +71,19 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="checkbox" name="chk"/></td>
+                    	<td><img src="icon-del.gif" alt="Delete Icon" class="del-row"/></td>
                         <td>BT-2293</td>
                         <td>Classified - Cleanupjob images</td>
                         <td>5h</td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox" name="chk"/></td>
+                    	<td><img src="icon-del.gif" alt="Delete Icon" class="del-row"/></td>
                         <td>BT-2299</td>
                         <td>Create DAO and Manager on Zett library to clean up ads</td>
                         <td>6h</td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox" name="chk"/></td>
+                    	<td><img src="icon-del.gif" alt="Delete Icon" class="del-row"/></td>
                         <td>BT-2300</td>
                         <td>Create component on transition for calling zett library to cleanup ads</td>
                         <td>3h</td>
@@ -82,23 +91,13 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td><input type="button" value="Del" id="btn-del" class="btn-in-tbl"/></td>
-                        <td colspan="2">TOTAL</td>
+                        <td colspan="3">Total</td>
                         <td>2d2h</td>
                     </tr>
                 </tfoot>
             </table>
-            
-            <script type="text/javascript">
-                $( document ).ready(function() {
-                    $("#btn-del").click(function(){
-                        if (!confirm("Do you want to delete")){
-                        return false;
-                        }
-                        $("table tr input:checked").parents('tr').remove();
-                    });
-                });
-            </script>
+            </div>
+            </div>
             
             
         </div>
@@ -108,10 +107,15 @@
     
     <div class="grid grid-pad">
         <div class="col-1-1">
+        <div class="story-box">
+        	<div class="story-name">
             <span>Story: </span><span class="vip-color">BT-2294 HOTFIX - Clissfied - Implement new mail functionality on Motor & Job</span><br/>
+            </div>
+            <div class="task-table">
             <table>
                 <thead>
                     <tr>
+                    	<th>Delete</th>
                         <th>Task</th>
                         <th>Detail</th>
                         <th>Time</th>
@@ -119,11 +123,13 @@
                 </thead>
                 <tbody>
                     <tr>
+                    	<td><img src="icon-del.gif" alt="Delete Icon" class="del-row"/></td>
                         <td>BT-2306</td>
                         <td>Apply new mail dialog design to Job and Motor prospect</td>
                         <td>6h</td>
                     </tr>
                     <tr>
+                    	<td><img src="icon-del.gif" alt="Delete Icon" class="del-row"/></td>
                         <td>BT-2307</td>
                         <td>Customize mail body following template</td>
                         <td>6h</td>
@@ -131,29 +137,84 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="2">TOTAL</td>
+                        <td colspan="3">Total</td>
                         <td>2d</td>
                     </tr>
                 </tfoot>
             </table>
-            
+            </div>
+            </div>
             
         </div>
         
         
-    </div> 
+    </div>
+    
+    <div class="grid grid-pad">
+        <div class="col-1-3">&nbsp; 
+        </div>
+        <div class="col-1-3">&nbsp;
+        </div>
+        <div class="col-1-3">
+        	<div class="total-box">
+        		<span>Grand Total</span>
+        		<span>123h</span>
+        	</div>
+        </div>
+        </div>
 
 
 </section>
-    
+<section>
+<div class="grid grid-pad">
+        <div class="col-1-3">&nbsp; 
+        </div>
+        <div class="col-1-3">&nbsp;
+        </div>
+        <div class="col-1-3">
+        	<div class="convert-box">
+        		<p>Convert file to:</p><br/>
+        			<div class="col-3">
+        				<input type="button" value="PDF"/> 
+        			</div>
+        			<div class="col-3">
+        				<input type="button" value="Excel"/> 
+        			</div>
+        			<div class="col-3">
+        				<input type="button" value="CSV"/>
+        			</div> 
+        		
+        	</div>
+        </div>
+</div>
+</section>
+
 <footer>
+<!--    
     <div class="grid grid-pad">
         <div class="col-1-1">
         Created by Amedia/Bangkok
         </div>
     </div>
-
+-->
 </footer>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".del-row").click(function(){
+    var checkstr =  confirm('Are you sure you want to delete this task?');
+		if(checkstr == true){
+		$(this).closest("tr").remove();  
+
+  // do your code
+		}else{
+		return false;
+		}
+
+  });
+});
+
+</script>
 
 </body>
 </html>
