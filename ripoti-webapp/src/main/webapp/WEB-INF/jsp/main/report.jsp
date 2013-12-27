@@ -105,13 +105,19 @@
                             </tr>
                         </thead>
                         <tbody data-bind="foreach: childIssues">
-                                <tr>
-                                    <td>BT-2293</td>
-                                    <td><span data-bind="text: title"></span></td>
-                                    <td><input type="text" data-bind="value: timeSpent.value, valueUpdate: 'afterkeydown'" /></td>
-                                    <td><img src="/assets/image/icon-del.gif" alt="Delete Icon" class="del-row" data-bind="click: $root.removeChildIssue.bind($data, $parentContext.$index())"/></td>
+                            <tr>
+                                <td>BT-2293</td>
+                                <td>
+                                    <div class="edit-box">
+                                        <span class="text_label" data-bind="text: title"></span>
+                                        <div class="edit edit-btn"></div>
+                                        <input type="text" data-bind="value: title" />
+                                    </div>
+                                </td>
+                                <td><input type="text" data-bind="value: timeSpent.value, valueUpdate: 'afterkeydown'" /></td>
+                                <td><img src="/assets/image/icon-del.gif" alt="Delete Icon" class="del-row" data-bind="click: $root.removeChildIssue.bind($data, $parentContext.$index())"/></td>
 
-                                </tr>
+                            </tr>
 
                         </tbody>
                         <tfoot>

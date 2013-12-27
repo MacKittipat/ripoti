@@ -12,6 +12,8 @@
         <style type="text/css" media="screen">
         /*<![CDATA[*/@import '<spring:url value="/assets/css/stylesheet.css" />';/*]]>*/
         </style>
+        <script type="text/javascript" src="/assets/js/easy-editable-text.js"></script>
+
     </head>
     <body>
         <jsp:include page="${pageContent}.jsp" />
