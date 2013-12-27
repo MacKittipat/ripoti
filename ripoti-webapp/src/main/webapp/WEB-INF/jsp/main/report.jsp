@@ -243,6 +243,10 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $("#viewId").change(function() {
+            if($(this).val() == 0) {
+                $("#sprintId option").remove();
+                return;
+            }
             $.get("<spring:url value='/rest/a/rapidviews/' />" + $(this).val() + "/sprints", function(data) {
                 $("#sprintId option").remove();
                 for(var i=0; i<data.length; i++) {
