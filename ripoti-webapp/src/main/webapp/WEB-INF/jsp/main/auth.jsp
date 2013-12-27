@@ -1,7 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<div class="login-bg">
+<div>
     <div class="login-box">
-        <div class="error-msg">${errorMsg}</div>
+        <c:if test="${errorMsg != null}">
+            <div class="error-msg">${errorMsg}</div>
+        </c:if>
         <div class="login-logo">
             <img src="/assets/image/amedia-logo-transparent.png" alt="Amedia Logo"/>
         </div>

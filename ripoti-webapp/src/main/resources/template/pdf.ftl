@@ -47,7 +47,9 @@
                     <div class="col-1-1">
                         <div class="story-box">
                             <div class="story-name">
-                                <span>Story: </span><span>${parentIssue.title}</span><br/>
+                                <span>Story: </span>
+                                <span>${parentIssue.key}</span>
+                                <span>${parentIssue.summary}</span><br/>
                             </div>
                             <div class="task-table">
                                 <table>
