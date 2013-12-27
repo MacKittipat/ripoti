@@ -78,7 +78,6 @@ public class MainController {
     @RequestMapping(value = "report")
     public String report(
             Model model,
-            HttpServletRequest request,
             @ModelAttribute ReportBuilderForm reportBuilderForm) {
         model.addAttribute("pageContent", "main/report");
         String authValue = jiraAuthStorageService.getAuthorizationValue();
@@ -86,12 +85,12 @@ public class MainController {
         View[] views = jiraViewStorageService.load();
         // If view storage does not exist, fetch view from jira and save to storage,
         if(views == null) {
-            log.info("Load views from Jira.");
+            log.info("Loading views from Jira REST service.");
             views = jiraRestService.getViews(authValue);
             jiraViewStorageService.save(views);
         }
         Map<String, String> viewMap = new LinkedHashMap<>();
-        viewMap.put("0", "Please select");
+        viewMap.put("0", "Please select board");
         for(View view : views) {
             viewMap.put(Integer.toString(view.getId()), view.getName());
         }
@@ -102,7 +101,7 @@ public class MainController {
             Sprint[] sprints = jiraRestService.getSprints(
                     authValue,
                     reportBuilderForm.getViewId());
-            sprintMap.put("0", "Please select");
+            sprintMap.put("0", "Please select sprint");
             for(Sprint sprint : sprints) {
                 sprintMap.put(Integer.toString(sprint.getId()), sprint.getName());
             }
@@ -111,6 +110,22 @@ public class MainController {
                 // Get issues from jira.
                 Search search = jiraRestService.getSearch(authValue, reportBuilderForm.getSprintId());
                 try {
+                    // Find current view name.
+                    String viewName = "";
+                    for(View view : views) {
+                        if(view.getId() == reportBuilderForm.getViewId().intValue()) {
+                            viewName = view.getName();
+                        }
+                    }
+                    model.addAttribute("viewName", viewName);
+                    // Find current sprint name.
+                    String sprintName = "";
+                    for(Sprint sprint : sprints) {
+                        if(sprint.getId() == reportBuilderForm.getSprintId().intValue()) {
+                            sprintName = sprint.getName();
+                        }
+                    }
+                    model.addAttribute("sprintName", sprintName);
                     // Convert json from jira to ripoti.
                     model.addAttribute(
                             "ripotiJson",

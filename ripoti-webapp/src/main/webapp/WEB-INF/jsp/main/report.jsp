@@ -79,11 +79,11 @@
      <div class="grid grid-pad">
         <div class="col-1-2">
 
-            <span>Board: </span><span class="vip-color">ABC Tech Thailand Classified</span>
+            <span>Board: </span><span class="vip-color">${viewName}</span>
         </div>
         <div class="col-1-2" style="text-align: right;">
 
-            <span>Sprint: </span><span class="vip-color">Sprint-Classified-45</span>
+            <span>Sprint: </span><span class="vip-color">${sprintName}</span>
         </div>
     </div>
     <div  data-bind="foreach: parentIssues">
@@ -249,6 +249,10 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $("#viewId").change(function() {
+            if($(this).val() == 0) {
+                $("#sprintId option").remove();
+                return;
+            }
             $.get("<spring:url value='/rest/a/rapidviews/' />" + $(this).val() + "/sprints", function(data) {
                 $("#sprintId option").remove();
                 for(var i=0; i<data.length; i++) {
