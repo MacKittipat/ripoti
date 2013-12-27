@@ -75,8 +75,8 @@
                                     <tbody>
                                         <#list parentIssue.childIssues as childIssue>
                                             <tr>
-                                                <td>BT-2293</td>
-                                                <td><span>${childIssue.title}</span></td>
+                                                <td>${childIssue.key}</td>
+                                                <td><span>${childIssue.summary}</span></td>
                                                 <td><span>${childIssue.timeSpent.value}</span></td>
                                             </tr>
                                         </#list>
