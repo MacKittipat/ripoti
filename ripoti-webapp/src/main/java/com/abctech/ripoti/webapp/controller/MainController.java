@@ -90,7 +90,7 @@ public class MainController {
             jiraViewStorageService.save(views);
         }
         Map<String, String> viewMap = new LinkedHashMap<>();
-        viewMap.put("0", "Please select view");
+        viewMap.put("0", "Please select board");
         for(View view : views) {
             viewMap.put(Integer.toString(view.getId()), view.getName());
         }
