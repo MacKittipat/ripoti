@@ -35,11 +35,11 @@
                     <span class="title"><strong>Time Spent Report</strong></span>
                 </div>
                 <div class="col-1-1" style="text-align: left; padding-bottom: 10px;">
-                    <span>Board: </span><span class="vip-color"></span>
+                    <span>Board: </span><span class="vip-color">${ripotiIssue.viewName}</span>
                 </div>
 
                 <div class="col-1-1" style="text-align: left;">
-                    <span>Sprint: </span><span class="vip-color"></span>
+                    <span>Sprint: </span><span class="vip-color">${ripotiIssue.sprintName}</span>
                 </div>
             </div>
             <#list ripotiIssue.parentIssues as parentIssue>

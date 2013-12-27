@@ -268,6 +268,8 @@
 
     function RipotiIssue() {
         var self = this;
+        self.viewName = "${viewName}";
+        self.sprintName = "${sprintName}";
         self.parentIssues = ko.observableArray(createParentIssues());
         self.timeSpent = new Object();
         self.timeSpent.value = ko.computed(function() {
