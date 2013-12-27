@@ -91,7 +91,9 @@
         <div class="col-1-1">
                 <div class="story-box">
                     <div class="story-name">
-                    <img src="/assets/image/icon-del.gif" alt="Delete Icon" class="del-row" data-bind="click: $root.removeParentIssue" style="margin-right: 10px;"/><span>Story: </span><span class="vip-color" data-bind="text: title"></span><br/>
+                    <img src="/assets/image/icon-del.gif" alt="Delete Icon" class="del-row" data-bind="click: $root.removeParentIssue" style="margin-right: 10px;"/><span>Story: </span>
+                        <span class="vip-color" data-bind="text: key"></span>
+                        <span class="vip-color" data-bind="text: summary"></span><br/>
                     </div>
                     <div class="task-table">
                     <table>
