@@ -106,12 +106,12 @@
                         </thead>
                         <tbody data-bind="foreach: childIssues">
                             <tr>
-                                <td>BT-2293</td>
+                                <td><span data-bind="text: key"></span></td>
                                 <td>
                                     <div class="edit-box">
-                                        <span class="text_label" data-bind="text: title"></span>
+                                        <span class="text_label" data-bind="text: summary"></span>
                                         <div class="edit edit-btn"></div>
-                                        <input type="text" data-bind="value: title" />
+                                        <input type="text" data-bind="value: summary" />
                                     </div>
                                 </td>
                                 <td><input type="text" data-bind="value: timeSpent.value, valueUpdate: 'afterkeydown'" /></td>
