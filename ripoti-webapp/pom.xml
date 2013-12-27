@@ -111,6 +111,7 @@
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <configuration>
+                    <contextXml>jetty/jetty.xml</contextXml>
                     <scanIntervalSeconds>5</scanIntervalSeconds>
                     <httpConnector>
                         <port>9000</port>
