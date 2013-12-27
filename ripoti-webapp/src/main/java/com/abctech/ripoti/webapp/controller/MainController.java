@@ -3,12 +3,13 @@ package com.abctech.ripoti.webapp.controller;
 import com.abctech.ripoti.webapp.form.AuthForm;
 import com.abctech.ripoti.webapp.form.ReportBuilderForm;
 import com.abctech.ripoti.webapp.json.jira.JiraSession;
-import com.abctech.ripoti.webapp.json.jira.sprintquery.Sprint;
 import com.abctech.ripoti.webapp.json.jira.rapidview.View;
 import com.abctech.ripoti.webapp.json.jira.search.Search;
+import com.abctech.ripoti.webapp.json.jira.sprintquery.Sprint;
 import com.abctech.ripoti.webapp.service.IJiraAuthStorageService;
 import com.abctech.ripoti.webapp.service.JiraRestService;
 import com.abctech.ripoti.webapp.service.JiraToRipotiService;
+import com.abctech.ripoti.webapp.service.JiraViewStorageService;
 import com.abctech.ripoti.webapp.util.Base64Util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,6 +40,9 @@ public class MainController {
 
     @Autowired
     private JiraToRipotiService jiraToRipotiService;
+
+    @Autowired
+    private JiraViewStorageService jiraViewStorageService;
 
     @Autowired
     private ObjectMapper jacksonObjectMapper;
@@ -79,8 +83,13 @@ public class MainController {
         model.addAttribute("pageContent", "main/report");
         String authValue = jiraAuthStorageService.getAuthorizationValue();
         // Generate viewMap for ddl.
-        View[] views = jiraRestService.getViews(
-                authValue);
+        View[] views = jiraViewStorageService.load();
+        // If view storage does not exist, fetch view from jira and save to storage,
+        if(views == null) {
+            log.info("Load views from Jira.");
+            views = jiraRestService.getViews(authValue);
+            jiraViewStorageService.save(views);
+        }
         Map<String, String> viewMap = new LinkedHashMap<>();
         viewMap.put("0", "Please select");
         for(View view : views) {

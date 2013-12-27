@@ -2,7 +2,9 @@ package com.abctech.ripoti.webapp.json.jira.rapidview;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class View {
+import java.io.Serializable;
+
+public class View implements Serializable {
 
     public int id;
     public String name;

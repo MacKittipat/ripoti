@@ -24,6 +24,9 @@ public class RipotiProperties {
     @Value(value = "${ripoti.query.search}")
     private String searchQuery;
 
+    @Value(value = "${ripoti.path.storage.view}")
+    private String viewStoragePath;
+
     public String getJiraUrl() {
         return jiraUrl;
     }
@@ -70,6 +73,14 @@ public class RipotiProperties {
 
     public void setSearchQuery(String searchQuery) {
         this.searchQuery = searchQuery;
+    }
+
+    public String getViewStoragePath() {
+        return viewStoragePath;
+    }
+
+    public void setViewStoragePath(String viewStoragePath) {
+        this.viewStoragePath = viewStoragePath;
     }
 
     // =================================================================================================================
