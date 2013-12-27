@@ -273,15 +273,27 @@
             var childIssues = new Array();
             for(var j=0; j<parentIssue.childIssues.length; j++) {
                 var childIssue = parentIssue.childIssues[j];
-                childIssues.push(new ChildIssue(childIssue.title, childIssue.timeSpent.value));
+                childIssues.push(new ChildIssue(
+                        childIssue.key,
+                        childIssue.summary,
+                        childIssue.title,
+                        childIssue.timeSpent.value
+                ));
             }
-            parentIssues.push(new ParentIssue(parentIssue.title, ko.observableArray(childIssues)))
+            parentIssues.push(new ParentIssue(
+                    parentIssue.key,
+                    parentIssue.summary,
+                    parentIssue.title,
+                    ko.observableArray(childIssues)
+            ));
         }
         return parentIssues;
     }
 
-    function ParentIssue(title, childIssues) {
+    function ParentIssue(key, summary, title, childIssues) {
         var self = this;
+        self.key = key;
+        self.summary = summary;
         self.title = title;
         self.timeSpent = new Object();
         self.timeSpent.value = ko.computed(function() {
@@ -295,8 +307,10 @@
         self.childIssues = childIssues;
     }
 
-    function ChildIssue(title, timeSpentValue) {
+    function ChildIssue(key, summary, title, timeSpentValue) {
         var self = this;
+        self.key = key;
+        self.summary = summary;
         self.title = title;
         self.timeSpent = new Object();
         self.timeSpent.value = ko.observable(timeSpentValue);
