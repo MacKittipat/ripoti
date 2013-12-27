@@ -23,7 +23,8 @@
             span.title{text-align:center;font-size:24px;color:#555555;margin-top:10px;}
             span.vip-color{color:#205081;}
             .grid {margin-top: 10px; margin-bottom: 10px;}
-
+            table.total-box {font-size:20px !important; font-weight: bold; color:#205081; padding-left: 20px; padding-right: 20px;}
+            table.total-box td:first-child {text-align: center;}
             footer{height:100px;}
 
         </style>
@@ -37,9 +38,11 @@
                 <div class="col-1-1" style="text-align: left; padding-bottom: 10px;">
                     <span>Board: </span><span class="vip-color"></span>
                 </div>
-
-                <div class="col-1-1" style="text-align: left;">
+                <div class="col-1-1" style="text-align: left; padding-bottom: 10px;">
                     <span>Sprint: </span><span class="vip-color"></span>
+                </div>
+                <div class="col-1-1" style="text-align: left;">
+                    <span>Total Time Spent: </span><span class="vip-color">${ripotiIssue.timeSpent.value} hr</span>
                 </div>
             </div>
             <#list ripotiIssue.parentIssues as parentIssue>
@@ -57,7 +60,7 @@
                                         <tr>
                                             <th>Task</th>
                                             <th>Detail</th>
-                                            <th>Time</th>
+                                            <th>Time (hr)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -82,12 +85,16 @@
                 </div>
             </#list>
             <div class="grid grid-pad">
-                <div class="col-1-1">
-                    <div class="total-box">
-                        <span>Total</span>
-                        <span>${ripotiIssue.timeSpent.value}</span>
-                    </div>
-                </div>
+                <table class="total-box">
+                <tr>
+                <td style="width: 100%;">
+                Grand Total (hr)
+                </td>
+                <td>
+                ${ripotiIssue.timeSpent.value}
+                </td>
+                </tr>
+                </table>
             </div>
         </section>
     </body>
