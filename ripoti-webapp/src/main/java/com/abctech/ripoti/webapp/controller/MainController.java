@@ -86,7 +86,7 @@ public class MainController {
         View[] views = jiraViewStorageService.load();
         // If view storage does not exist, fetch view from jira and save to storage,
         if(views == null) {
-            log.info("Load views from Jira.");
+            log.info("Load views from Jira REST service.");
             views = jiraRestService.getViews(authValue);
             jiraViewStorageService.save(views);
         }
