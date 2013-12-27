@@ -115,7 +115,14 @@
                                         <input type="text" class="editable" data-bind="value: summary" />
                                     </div>
                                 </td>
-                                <td><input type="text" data-bind="value: timeSpent.value, valueUpdate: 'afterkeydown'" /></td>
+                                <td>
+                                    <div class="edit-box">
+                                        <span class="text_label" data-bind="text: timeSpent.value"></span>
+                                        <div class="edit edit-btn"></div>
+                                        <input type="text" class="editable" data-bind="value: timeSpent.value, valueUpdate: 'afterkeydown'" />
+                                    </div>
+                                <!--<input type="text" data-bind="value: timeSpent.value, valueUpdate: 'afterkeydown'" />-->
+                                </td>
                                 <td><img src="/assets/image/icon-del.gif" alt="Delete Icon" class="del-row" data-bind="click: $root.removeChildIssue.bind($data, $parentContext.$index())"/></td>
 
                             </tr>
