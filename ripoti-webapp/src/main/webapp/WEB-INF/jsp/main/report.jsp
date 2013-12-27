@@ -111,7 +111,7 @@
                                     <div class="edit-box">
                                         <span class="text_label" data-bind="text: summary"></span>
                                         <div class="edit edit-btn"></div>
-                                        <input type="text" data-bind="value: summary" />
+                                        <input type="text" class="editable" data-bind="value: summary" />
                                     </div>
                                 </td>
                                 <td><input type="text" data-bind="value: timeSpent.value, valueUpdate: 'afterkeydown'" /></td>
@@ -167,10 +167,10 @@
                             <input type="submit" value="PDF" />
                         </div>
                         <div class="col-3">
-                            <input type="submit" value="Excel"/>
+                            <input type="submit" class="disable-btn" value="Excel"/>
                         </div>
                         <div class="col-3">
-                            <input type="submit" value="CSV"/>
+                            <input type="submit" class="disable-btn" value="CSV"/>
                         </div>
 
                 </div>
@@ -192,58 +192,6 @@
 -->
 </footer>
 
-
-
-
-
-
-
-
-<!--
-<div>
-    <form:form commandName="reportBuilderForm" method="get">
-        <form:select path="viewId" items="${viewMap}" />
-        <form:select path="sprintId" items="${sprintMap}" />
-        <input type="submit" value="Show Report" />
-    </form:form>
-    <div>
-        ${ripotiJson}
-    </div>
-    <div>
-        <form id="frmExportPdf" action="<spring:url value='/export/pdf' />" onsubmit="exportFile('frmExportPdf')" method="post">
-            <input type="hidden" id="ripotiIssueJson" name="ripotiIssueJson" />
-            <input type="submit" value="PDF" />
-        </form>
-    </div>
-    <c:if test="${ripotiJson != null}">
-        <div>
-            <div data-bind="foreach: parentIssues">
-                <div>
-                    <div style="background-color: lightgray">
-                        <span data-bind="text: title"></span>
-                        <span data-bind="text: timeSpent.value"></span>
-                        <span data-bind="click: $root.removeParentIssue">&times;</span>
-                    </div>
-                    <div data-bind="foreach: childIssues">
-                        <div>
-                            <span data-bind="text: title"></span>
-                            <input type="text" data-bind="value: timeSpent.value, valueUpdate: 'afterkeydown'" />
-                            <span data-bind="click: $root.removeChildIssue.bind($data, $parentContext.$index())">&times;</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div style="background-color: darkgrey">
-                <span>Total</span>
-                <span data-bind="text: timeSpent.value"></span>
-            </div>
-        </div>
-    </c:if>
-</div>
-<div>
-
-</div>
--->
 
 <script type="text/javascript" src="<spring:url value='/assets/js/knockout/knockout-3.0.0.js' />"></script>
 <script type="text/javascript">

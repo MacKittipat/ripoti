@@ -210,6 +210,16 @@ input[type=button],input[type=submit] {
 input[type=button]:hover,input[type=submit]:hover {
     background: @hover-theme-color;
 }
+input[type=button].disable-btn,input[type=submit].disable-btn {
+    background: #c0c0c0;
+    border: 0;
+    padding: 5px;
+    color: #ffffff;
+    text-shadow: none;
+}
+input[type=button].disable-btn:hover,input[type=submit].disable-btn:hover {
+    background: #c0c0c0;
+}
 select {
     width: 100%;
     padding:5px;
@@ -349,6 +359,9 @@ table {
             text-align: left !important;
         }
     }
+    input {
+        margin: 0px !important;
+    }
 }
 .total-box {
     border: 1px solid #eeeeee;
@@ -423,6 +436,11 @@ background: white;
 padding-right: 0px;
 position: relative;
 
+    span {
+        width: 100%;
+        padding-right: 20px;
+    }
+
     input[type=text]
     {
     margin:0px;
@@ -436,14 +454,14 @@ position: relative;
     .edit-btn
     {
     float:right;
-    position: relative;
-	background:url(edit-icon.png) no-repeat;
-	background-position: 0px 5px;
+    position: absolute;
+	background:url(edit-icon.png) no-repeat center;
 	width:16px;
-	height:21px;
+	height: 100%;
 	display:none;
 	cursor: pointer;
-	margin-right:0px;
+	right:0px;
+    top: 2px;
 	padding: 0px;
 	z-index:2;
     }

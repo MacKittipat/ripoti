@@ -8,7 +8,7 @@ $(document).ready(function(){
 	});
 	
 	
-	$('input[type="text"]').blur(function() {  
+	$('input[type="text"].editable').blur(function() {  
          if ($.trim(this.value) == ''){  
 			 this.value = (this.defaultValue ? this.defaultValue : '');  
 		 }
@@ -21,7 +21,7 @@ $(document).ready(function(){
 		 $(this).prev().prev().show();
      });
 	  
-	  $('input[type="text"]').keypress(function(event) {
+	  $('input[type="text"].editable').keypress(function(event) {
 		  if (event.keyCode == '13') {
 			  if ($.trim(this.value) == ''){  
 				 this.value = (this.defaultValue ? this.defaultValue : '');  
