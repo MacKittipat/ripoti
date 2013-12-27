@@ -80,6 +80,6 @@ public class JiraToRipotiService {
     }
 
     private String createTitle(String key, String summary) {
-        return "[" + key + "] " + summary;
+        return "[ " + key + " ] " + summary;
     }
 }

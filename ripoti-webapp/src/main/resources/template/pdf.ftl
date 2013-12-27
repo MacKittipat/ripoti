@@ -48,15 +48,14 @@
                         <div class="story-box">
                             <div class="story-name">
                                 <span>Story: </span>
-                                <span>${parentIssue.key}</span>
-                                <span>${parentIssue.summary}</span><br/>
+                                <span>${parentIssue.title}</span><br/>
                             </div>
                             <div class="task-table">
                                 <table>
                                     <thead>
                                         <tr>
                                             <th>Task</th>
-                                            <th>Detail</th>
+                                            <th style="width: 100%">Detail</th>
                                             <th>Time</th>
                                         </tr>
                                     </thead>
