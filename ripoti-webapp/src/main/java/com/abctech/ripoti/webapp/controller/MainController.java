@@ -141,4 +141,11 @@ public class MainController {
         }
         return "layout";
     }
+
+    @RequestMapping("updateboard")
+    public String updateBoard() {
+        String authValue = jiraAuthStorageService.getAuthorizationValue();
+        jiraViewStorageService.save(jiraRestService.getViews(authValue));
+        return "redirect:report";
+    }
 }
