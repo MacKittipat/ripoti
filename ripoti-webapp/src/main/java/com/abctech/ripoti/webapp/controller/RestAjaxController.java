@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.Collections;
 
 @Controller
 @RequestMapping(value = "rest/a")
@@ -35,6 +37,8 @@ public class RestAjaxController {
         Sprint[] sprints = jiraRestService.getSprints(
                 jiraAuthStorageService.getAuthorizationValue(),
                 rapidViewId);
+        // Reverse array, last sprint is on top.
+        Collections.reverse(Arrays.asList(sprints));
         return sprints;
     }
 }
