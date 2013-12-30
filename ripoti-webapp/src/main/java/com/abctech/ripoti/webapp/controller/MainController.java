@@ -54,6 +54,9 @@ public class MainController {
 
     @RequestMapping(value = "auth")
     public String auth(Model model, HttpServletRequest request, @ModelAttribute AuthForm authForm) {
+        if(jiraAuthStorageService.getAuthorizationValue() != null) { // If already authenticated.
+            return "redirect:report";
+        }
         model.addAttribute("pageContent", "main/auth");
         if(RequestMethod.POST.toString().equals(request.getMethod())) {
             log.info("User {} is authenticating for Jira's REST service", authForm.getUsername());
