@@ -91,8 +91,14 @@
         <div class="col-1-1">
                 <div class="story-box">
                     <div class="story-name">
-                    <img src="/assets/image/icon-del.gif" alt="Delete Icon" class="del-row" data-bind="click: $root.removeParentIssue" style="margin-right: 10px;"/><span>Story: </span>
-                        <span class="vip-color" data-bind="text: title"></span><br/>
+                        <span style="float: left; width: 50px;">Story: </span>
+                        <div class="edit-box">
+                            <span class="text_label" data-bind="text: title"></span>
+                            <div class="edit edit-btn"></div>
+                            <input type="text" class="editable" data-bind="value: title" style="width: 100%;" />
+                        </div>
+                        <img src="/assets/image/icon-del.gif" alt="Delete Icon" class="del-row" data-bind="click: $root.removeParentIssue"/>
+
                     </div>
                     <div class="task-table">
                     <table>
@@ -186,7 +192,7 @@
     </div>
 </form>
 </section>
-<a href="#go-down" class="go-down">Convert and Download</a>
+<a href="#go-down" class="go-down"><img src="/assets/image/download-file.png" alt="Download File"/>&nbsp;&nbsp;&nbsp;Convert and Download Report</a>
 
 </c:if>
 
