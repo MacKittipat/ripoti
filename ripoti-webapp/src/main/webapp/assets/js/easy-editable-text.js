@@ -17,7 +17,8 @@ $(document).ready(function(){
 		 }
 		 
 		 $(this).hide();
-		 $(this).prev().show();
+		 $(this).prev().show;
+		 $(this).prev().css( "display", "" );
 		 $(this).prev().prev().show();
      });
 	  
@@ -32,7 +33,8 @@ $(document).ready(function(){
 			 }
 			 
 			 $(this).hide();
-			 $(this).prev().show();
+             $(this).prev().show;
+             $(this).prev().css( "display", "" );
 			 $(this).prev().prev().show();
 			 
 		  }

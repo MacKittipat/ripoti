@@ -14,8 +14,8 @@
 <section class="msg-box">
     <article>
         <div class="grid grid-pad">
-            <div class="col-1-1" style="text-align: center; padding-top: 10px;">
-                <span class="title"><strong>ripoti</strong> will generate <strong>Time Spend Report</strong> for you. Just follow the steps :)</span>
+            <div class="col-1-1" style="text-align: center;">
+                <span class="title"><strong style="font-size: 36px; color:#205081;">ripoti</strong> will generate <strong>Time Spend Report</strong> for you. Just follow the steps :)</span>
             </div>
         </div>
         <form:form commandName="reportBuilderForm" method="get">
@@ -27,9 +27,8 @@
                         </div>
                     </div>
                     <div class="col-9-12" style="padding-top: 10px;">
-                        <div  style="position: relative;">
+                        <div  class="custom-select" style="position: relative;">
                             <form:select path="viewId" items="${viewMap}" />
-                            <div class="arrow-select">&nbsp;</div>
                         </div>
                     </div>
                 </div>
@@ -40,9 +39,8 @@
                         </div>
                     </div>
                     <div class="col-9-12" style="padding-top: 10px;">
-                        <div  style="position: relative;">
+                        <div  class="custom-select" style="position: relative;">
                             <form:select path="sprintId" items="${sprintMap}" />
-                            <div class="arrow-select">&nbsp;</div>
                         </div>
                     </div>
                 </div>
@@ -90,7 +88,7 @@
                                     <tr>
                                         <th>Task</th>
                                         <th>Detail</th>
-                                        <th>Time</th>
+                                        <th>Time (hr)</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
@@ -166,7 +164,7 @@
             </div>
         </form>
     </section>
-    <a href="#go-down" class="go-down"><img src="<spring:url value='/assets/image/download-file.png' />" alt="Download File"/>&nbsp;&nbsp;&nbsp;Convert and Download Report</a>
+    <a href="#go-down" class="go-down">Jump to Convert and Download Report</a>
 </c:if>
 
 <footer>
