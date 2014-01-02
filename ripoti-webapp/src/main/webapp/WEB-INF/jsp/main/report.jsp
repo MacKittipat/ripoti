@@ -2,6 +2,30 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
+<style>
+    .spinner {
+        -webkit-animation: scaleout 0.7s infinite ease-in-out;
+        animation: scaleout 0.7s infinite ease-in-out;
+    }
+    @-webkit-keyframes scaleout {
+        0% { -webkit-transform: scale(0.0) }
+        100% {
+            -webkit-transform: scale(1.0);
+            opacity: 0;
+        }
+    }
+    @keyframes scaleout {
+        0% {
+            transform: scale(0.0);
+            -webkit-transform: scale(0.0);
+        } 100% {
+              transform: scale(1.0);
+              -webkit-transform: scale(1.0);
+              opacity: 0;
+          }
+    }
+</style>
+
 <header>
     <div class="grid grid-pad">
         <div class="col-1-1">
@@ -34,7 +58,7 @@
                 </div>
                 <div class="col-4-12">
                     <div class="col-3-12">
-                        <div class="num-round">
+                        <div id="loadingSprint" class="num-round">
                             2
                         </div>
                     </div>
@@ -192,11 +216,13 @@
                 $("#sprintId option").remove();
                 return;
             }
+            $("#loadingSprint").addClass("spinner");
             $.get("<spring:url value='/rest/a/rapidviews/' />" + $(this).val() + "/sprints", function(data) {
                 $("#sprintId option").remove();
                 for(var i=0; i<data.length; i++) {
                     $("#sprintId").append("<option value='" + data[i].id + "'>" + data[i].name + "</option>");
                 }
+                $("#loadingSprint").removeClass("spinner");
             })
         });
     });
