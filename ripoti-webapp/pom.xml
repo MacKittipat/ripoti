@@ -116,6 +116,9 @@
                     <httpConnector>
                         <port>9000</port>
                     </httpConnector>
+                    <!--<webApp>-->
+                        <!--<contextPath>/ripoti</contextPath>-->
+                    <!--</webApp>-->
                     <systemProperties>
                         <systemProperty>
                             <name>logback.configurationFile</name>
