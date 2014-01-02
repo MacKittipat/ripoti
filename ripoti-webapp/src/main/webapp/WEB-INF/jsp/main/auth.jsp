@@ -3,9 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <div class="login-bg">
     <div class="login-box">
-        <c:if test="${errorMsg != null}">
-            <div class="error-msg">${errorMsg}</div>
-        </c:if>
+
         <div class="login-logo">
             <img src="<spring:url value='/assets/image/amedia-logo-transparent.png' />" alt="Amedia Logo"/>
         </div>
@@ -26,6 +24,9 @@
                 </div>
             </div>
         </form:form>
+        <c:if test="${errorMsg != null}">
+            <div class="error-msg">${errorMsg}</div>
+        </c:if>
     </div>
 </div>
 
