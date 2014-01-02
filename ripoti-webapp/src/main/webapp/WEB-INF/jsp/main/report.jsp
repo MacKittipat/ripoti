@@ -2,15 +2,13 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-
 <header>
-
     <div class="grid grid-pad">
         <div class="col-1-1">
-        <img src="/assets/image/amedia-logo-transparent.png" alt="Amedia Logo"/><span class="project-name">ripoti</span>
+            <img src="<spring:url value='/assets/image/amedia-logo-transparent.png' />" alt="Amedia Logo"/>
+            <span class="project-name">ripoti</span>
         </div>
     </div>
-
 </header>
 
 <section class="msg-box">
@@ -20,162 +18,139 @@
                 <span class="title"><strong>ripoti</strong> will generate <strong>Time Spend Report</strong> for you. Just follow the steps :)</span>
             </div>
         </div>
-
         <form:form commandName="reportBuilderForm" method="get">
-        <div class="grid grid-pad">
-            <div class="col-4-12">
-
-                <div class="col-3-12">
-                    <div class="num-round">
-                    1
+            <div class="grid grid-pad">
+                <div class="col-4-12">
+                    <div class="col-3-12">
+                        <div class="num-round">
+                            1
+                        </div>
+                    </div>
+                    <div class="col-9-12" style="padding-top: 10px;">
+                        <div  style="position: relative;">
+                            <form:select path="viewId" items="${viewMap}" />
+                            <div class="arrow-select">&nbsp;</div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-9-12" style="padding-top: 10px;">
-                    <div  style="position: relative;">
-                    <form:select path="viewId" items="${viewMap}" />
-                    <div class="arrow-select">&nbsp;</div>
+                <div class="col-4-12">
+                    <div class="col-3-12">
+                        <div class="num-round">
+                            2
+                        </div>
+                    </div>
+                    <div class="col-9-12" style="padding-top: 10px;">
+                        <div  style="position: relative;">
+                            <form:select path="sprintId" items="${sprintMap}" />
+                            <div class="arrow-select">&nbsp;</div>
+                        </div>
                     </div>
                 </div>
-
+                <div class="col-4-12">
+                    <div class="col-3-12">
+                        <div class="num-round">
+                            3
+                        </div>
+                    </div>
+                    <div class="col-9-12">
+                        <input type="submit" value="Show Report" style="width: 100%;" />
+                    </div>
+                </div>
             </div>
-
-            <div class="col-4-12">
-
-                <div class="col-3-12">
-                    <div class="num-round">
-                    2
-                    </div>
-                </div>
-                <div class="col-9-12" style="padding-top: 10px;">
-
-                    <div  style="position: relative;">
-                    <form:select path="sprintId" items="${sprintMap}" />
-                    <div class="arrow-select">&nbsp;</div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="col-4-12">
-
-                <div class="col-3-12">
-                <div class="num-round">
-                3
-                </div>
-                </div>
-                <div class="col-9-12">
-                    <input type="submit" value="Show Report" style="width: 100%;" />
-                </div>
-
-            </div>
-
-        </div>
         </form:form>
     </article>
 </section>
 
 <c:if test="${ripotiJson != null}">
-<section>
-     <div class="grid grid-pad">
-        <div class="col-1-2">
-
-            <span>Board: </span><span class="vip-color">${viewName}</span>
-        </div>
-        <div class="col-1-2" style="text-align: right;">
-
-            <span>Sprint: </span><span class="vip-color">${sprintName}</span>
-        </div>
-    </div>
-    <div  data-bind="foreach: parentIssues">
-    <div class="grid grid-pad">
-        <div class="col-1-1">
-                <div class="story-box">
-                    <div class="story-name">
-                        <span style="float: left; width: 50px;">Story: </span>
-                        <div class="edit-box">
-                            <span class="text_label" data-bind="text: title"></span>
-                            <div class="edit edit-btn"></div>
-                            <input type="text" class="editable" data-bind="value: title" style="width: 100%;" />
-                        </div>
-                        <img src="/assets/image/icon-del.gif" alt="Delete Icon" class="del-row" data-bind="click: $root.removeParentIssue"/>
-
-                    </div>
-                    <div class="task-table">
-                    <table>
-                        <thead>
-                            <tr>
-
-                                <th>Task</th>
-                                <th>Detail</th>
-                                <th>Time</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody data-bind="foreach: childIssues">
-                            <tr>
-                                <td><span data-bind="text: key"></span></td>
-                                <td>
-                                    <div class="edit-box">
-                                        <span class="text_label" data-bind="text: summary"></span>
-                                        <div class="edit edit-btn"></div>
-                                        <input type="text" class="editable" data-bind="value: summary" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="edit-box">
-                                        <span class="text_label" data-bind="text: timeSpent.value"></span>
-                                        <div class="edit edit-btn"></div>
-                                        <input type="text" class="editable" data-bind="value: timeSpent.value, valueUpdate: 'afterkeydown'" />
-                                    </div>
-                                <!--<input type="text" data-bind="value: timeSpent.value, valueUpdate: 'afterkeydown'" />-->
-                                </td>
-                                <td><img src="/assets/image/icon-del.gif" alt="Delete Icon" class="del-row" data-bind="click: $root.removeChildIssue.bind($data, $parentContext.$index())"/></td>
-
-                            </tr>
-
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="2">Total</td>
-                                <td colspan="2"><span data-bind="text: timeSpent.value"></span></td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    </div>
-                </div>
-
-
-        </div>
-    </div>
-
-    </div>
-
-    <div class="grid grid-pad">
-        <div class="col-1-3">&nbsp;
-        </div>
-        <div class="col-1-3">&nbsp;
-        </div>
-        <div class="col-1-3">
-            <div class="total-box">
-                <span>Grand Total</span>
-                <span data-bind="text: timeSpent.value"></span>
+    <section>
+        <div class="grid grid-pad">
+            <div class="col-1-2">
+                <span>Board: </span><span class="vip-color">${viewName}</span>
+            </div>
+            <div class="col-1-2" style="text-align: right;">
+                <span>Sprint: </span><span class="vip-color">${sprintName}</span>
             </div>
         </div>
-    </div>
-
-</section>
-<a name="go-down"></a>
-
-<section>
-<form id="frmExportPdf" action="<spring:url value='/export/pdf' />" onsubmit="exportFile('frmExportPdf')" method="post">
-     <div class="grid grid-pad">
+        <div  data-bind="foreach: parentIssues">
+            <div class="grid grid-pad">
+                <div class="col-1-1">
+                    <div class="story-box">
+                        <div class="story-name">
+                            <span style="float: left; width: 50px;">Story: </span>
+                            <div class="edit-box">
+                                <span class="text_label" data-bind="text: title"></span>
+                                <div class="edit edit-btn"></div>
+                                <input type="text" class="editable" data-bind="value: title" style="width: 100%;" />
+                            </div>
+                            <img src="<spring:url value='/assets/image/icon-del.gif' />" alt="Delete Icon" class="del-row" data-bind="click: $root.removeParentIssue"/>
+                        </div>
+                        <div class="task-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Task</th>
+                                        <th>Detail</th>
+                                        <th>Time</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach: childIssues">
+                                    <tr>
+                                        <td><span data-bind="text: key"></span></td>
+                                        <td>
+                                            <div class="edit-box">
+                                                <span class="text_label" data-bind="text: summary"></span>
+                                                <div class="edit edit-btn"></div>
+                                                <input type="text" class="editable" data-bind="value: summary" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="edit-box">
+                                                <span class="text_label" data-bind="text: timeSpent.value"></span>
+                                                <div class="edit edit-btn"></div>
+                                                <input type="text" class="editable" data-bind="value: timeSpent.value, valueUpdate: 'afterkeydown'" />
+                                            </div>
+                                        </td>
+                                        <td><img src="<spring:url value='/assets/image/icon-del.gif' />" alt="Delete Icon" class="del-row" data-bind="click: $root.removeChildIssue.bind($data, $parentContext.$index())"/></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2">Total</td>
+                                        <td colspan="2"><span data-bind="text: timeSpent.value"></span></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-pad">
             <div class="col-1-3">&nbsp;
             </div>
             <div class="col-1-3">&nbsp;
             </div>
             <div class="col-1-3">
-                <div class="convert-box">
-                    <p>Convert file to:</p>
+                <div class="total-box">
+                    <span>Grand Total</span>
+                    <span data-bind="text: timeSpent.value"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <a name="go-down"></a>
+
+    <section>
+        <form id="frmExportPdf" action="<spring:url value='/export/pdf' />" onsubmit="exportFile('frmExportPdf')" method="post">
+            <div class="grid grid-pad">
+                <div class="col-1-3">&nbsp;
+                </div>
+                <div class="col-1-3">&nbsp;
+                </div>
+                <div class="col-1-3">
+                    <div class="convert-box">
+                        <p>Convert file to:</p>
                         <div class="col-3">
                             <input type="hidden" id="ripotiIssueJson" name="ripotiIssueJson" />
                             <input type="submit" value="PDF" />
@@ -186,14 +161,12 @@
                         <div class="col-3">
                             <input type="submit" class="disable-btn" value="CSV"/>
                         </div>
-
+                    </div>
                 </div>
             </div>
-    </div>
-</form>
-</section>
-<a href="#go-down" class="go-down"><img src="/assets/image/download-file.png" alt="Download File"/>&nbsp;&nbsp;&nbsp;Convert and Download Report</a>
-
+        </form>
+    </section>
+    <a href="#go-down" class="go-down"><img src="<spring:url value='/assets/image/download-file.png' />" alt="Download File"/>&nbsp;&nbsp;&nbsp;Convert and Download Report</a>
 </c:if>
 
 <footer>
