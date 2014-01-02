@@ -52,7 +52,11 @@
                         <div class="story-box">
                             <div class="story-name">
                                 <span>Story: </span>
-                                <span>${parentIssue.title}</span><br/>
+                                <span>
+                                    <#escape x as x?html>
+                                        ${parentIssue.title}
+                                    </#escape>
+                                </span><br/>
                             </div>
                             <div class="task-table">
                                 <table>
@@ -66,8 +70,18 @@
                                     <tbody>
                                         <#list parentIssue.childIssues as childIssue>
                                             <tr>
-                                                <td>${childIssue.key}</td>
-                                                <td><span>${childIssue.summary}</span></td>
+                                                <td>
+                                                    <#escape x as x?html>
+                                                        ${childIssue.key}
+                                                    </#escape>
+                                                </td>
+                                                <td>
+                                                    <span>
+                                                        <#escape x as x?html>
+                                                            ${childIssue.summary}
+                                                        </#escape>
+                                                    </span>
+                                                </td>
                                                 <td><span>${childIssue.timeSpent.value}</span></td>
                                             </tr>
                                         </#list>
@@ -86,14 +100,14 @@
             </#list>
             <div class="grid grid-pad">
                 <table class="total-box">
-                <tr>
-                <td style="width: 100%;">
-                Grand Total (hr)
-                </td>
-                <td>
-                ${ripotiIssue.timeSpent.value}
-                </td>
-                </tr>
+                    <tr>
+                        <td style="width: 100%;">
+                            Grand Total (hr)
+                        </td>
+                        <td>
+                            ${ripotiIssue.timeSpent.value}
+                        </td>
+                    </tr>
                 </table>
             </div>
         </section>
