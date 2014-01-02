@@ -167,6 +167,12 @@
     <a href="#go-down" class="go-down">Jump to Convert and Download Report</a>
 </c:if>
 
+<c:if test="${ripotiJson == null}">
+
+<p style="text-align: center; font-size: 24px; color: #c0c0c0; margin-top: 200px;">Please select Board and Sprint.</p>
+
+</c:if>
+
 <footer>
  <!--
     <div class="grid grid-pad">
