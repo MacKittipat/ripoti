@@ -91,7 +91,7 @@ header {
 }
 
 .login-box {
-    width: 600px;
+    width: 300px;
     height: 210px;
     padding: 20px;
     background: #eee;
@@ -99,8 +99,8 @@ header {
     position: absolute;
     left: 50%;
     top: 50%;
-    margin-top: -115px;
-    margin-left: -300px;
+    margin-top: -130px;
+    margin-left: -150px;
     .border-radius(5px);
     -webkit-box-shadow: 0 0 3px 2px rgba(00,00,00,.2);
     box-shadow: 0 0 3px 2px rgba(00,00,00,.2);
@@ -108,19 +108,7 @@ header {
     
     .login-logo {
         position: absolute;
-        top: -60px;
-    }
-    
-    .login-left {
-        float: left;
-        width: 250px;
-    }
-    .login-right {
-        float: left;
-        width: 300px;
-        border-left: 1px solid #c0c0c0;
-        padding-left: 20px;
-        margin: 0px;
+        top: -40px;
     }
     
     .error-msg {
@@ -128,6 +116,13 @@ header {
         color: red;
         font-size: 16px;
         width: 100%;
+        -webkit-box-shadow: 0 0 3px 2px rgba(00,00,00,.2);
+        box-shadow: 0 0 3px 2px rgba(00,00,00,.2);
+        background: red;
+        color: white;
+        padding: 10px 20px;
+        margin-top: 20px;
+        .border-radius(2px);
     }
     
     header {
@@ -238,40 +233,61 @@ select {
     .border-radius(2px);
 }
 
-.arrow-select {
-    width: 22px; height: 100%; float: right; 
-    background: #e0e0e0 url('arrow-down.png') no-repeat center; 
-    display: block; position: absolute; right: 10px; top: 0px;
-    .border-radius(2px);
-}
-.arrow-select:hover {
-    background: #d5d5d5 url('arrow-down.png') no-repeat center; 
-}
-select.cute-ui {
-    padding:5px;
-    margin: 0;
-    font-family: @default-font;
-    font-size: 18px;
-    .border-radius(3px) !important;
-    -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
-    -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
-    box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
-    background: #ffffff;
-    border: 1px solid #f8f8f8 !important;
-    color:#555555 !important;
-    display: inline-block;
-    -webkit-appearance:none;
-    -moz-appearance:none;
-    appearance:none;
-    cursor:pointer;
-    margin-top: 10px;
+.custom-select {
+    select {
+        display: inline-block;
+        border: 1px solid #bbb;
+        padding: 4px 3px 3px 5px;
+        margin: 0;
+        margin-left: -10px;
+        font: inherit;
+        outline:none; /* remove focus ring from Webkit */
+        line-height: 1.2;
+        background: #f8f8f8;
+        -webkit-appearance:none; /* remove the strong OSX influence from Webkit */
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        border-radius: 2px;
+    }
+
+    /* for Webkit's CSS-only solution */
+    @media screen and (-webkit-min-device-pixel-ratio:0) { 
+        .custom-select select {
+            padding-right:30px;    
+        }
+    }
+    
+    /* Since we removed the default focus styles, we have to add our own */
+    select:focus {
+        -webkit-box-shadow: 0 0 3px 1px #c00;
+        -moz-box-shadow: 0 0 3px 1px #c00;
+        box-shadow: 0 0 3px 1px #c00;
+    }
+    
     
 }
-
-/* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    select {padding-right:18px}
-}
+/* Select arrow styling */
+    .custom-select:after {
+        content: url(arrow-down.png);
+        position: absolute;
+        top: 0;
+        right: 10px;
+        bottom: 0;
+        font-size: 50%;
+        padding: 10px 7px;
+        background: #bbb;
+        color: white;
+        width: 25px;
+        pointer-events:none;
+        
+        -webkit-border-radius: 0 2px 2px 0;
+        -moz-border-radius: 0 2px 2px 0;
+        border-radius: 0 2px 2px 0;
+    }
+    
+    .no-pointer-events .custom-select:after {
+        content: none;
+    }
 
 label {position:relative}
 label:after {
@@ -313,9 +329,25 @@ label:hover:before {
     .story-name {
         background: @second-theme-color;
         padding: 10px 15px;
+        position:relative;
+        float:left;
+        width:100%;
         img.del-row {
             float: right;
             margin-top: 3px;
+        }
+        .edit-box {
+            background:#eef6ff;
+            color:#205081;
+            float:left;
+            width:930px;
+        }
+        .edit-box:hover {
+            background: #f5f5f5;
+            border-radius: 3px;
+            .edit-btn {
+            display: block;
+	        }
         }
     }
     .task-table {
@@ -331,7 +363,7 @@ table {
         width: 100px;
     }
     td:nth-child(3), th:nth-child(3) {
-        width: 150px;
+        width: 130px;
     }
     td:last-child, th:last-child {
         width: 60px;
@@ -388,7 +420,7 @@ table {
     }
     span:last-child {
         float: right;
-        width: 220px;
+        width: 200px;
         padding: 7px;
         font-weight: bold;
     }
@@ -417,7 +449,6 @@ span.title {
     text-align: center;
     font-size: 24px;
     color: #555555;
-    margin-top: 10px;
 }
 span.vip-color {
     color: @default-theme-color;
@@ -476,8 +507,6 @@ position: relative;
 .edit-box:hover {
     background: #f5f5f5;
     border-radius: 3px;
-    
-    
     .edit-btn {
     display: block;
 	}
@@ -485,20 +514,21 @@ position: relative;
 
 .go-down {
     position:fixed;
-    width:280px;
+    width:200px;
     top:40%;
     right: 0px;
-    margin-right:-235px;
-    padding: 10px 15px 10px 15px;
-    background:#d00;
-    -webkit-transition:margin-right .5s ease-in-out;
+    margin-right:-160px;
+    padding: 10px 15px 10px 40px;
+    transition:margin-right 1s ease-in-out;
+    -webkit-transition:margin-right 1s ease-in-out;
     z-index:1;
     box-shadow:1px 0 3px rgba(0,0,0,.5);
-    background: #555;
     color: none;
     text-decoration: none;
     .border-radius(2px);
     color: #fff;
+    font-size: 14px;
+    background: #555 url(download-file.png) no-repeat 10px center;
 }
 .go-down:after{
     

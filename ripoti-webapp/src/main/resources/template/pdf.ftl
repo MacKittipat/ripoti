@@ -39,7 +39,7 @@
                     <span>Board: </span><span class="vip-color">${ripotiIssue.viewName}</span>
                 </div>
 
-                <div class="col-1-1" style="text-align: left;">
+                <div class="col-1-1" style="text-align: left; padding-bottom: 10px;">
                     <span>Sprint: </span><span class="vip-color">${ripotiIssue.sprintName}</span>
                 </div>
                 <div class="col-1-1" style="text-align: left;">
