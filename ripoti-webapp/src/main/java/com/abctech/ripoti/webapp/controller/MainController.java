@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.HttpClientErrorException;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -104,6 +106,8 @@ public class MainController {
             Sprint[] sprints = jiraRestService.getSprints(
                     authValue,
                     reportBuilderForm.getViewId());
+            // Reverse array, last sprint is on top.
+            Collections.reverse(Arrays.asList(sprints));
             sprintMap.put("0", "Please select sprint");
             for(Sprint sprint : sprints) {
                 sprintMap.put(Integer.toString(sprint.getId()), sprint.getName());
