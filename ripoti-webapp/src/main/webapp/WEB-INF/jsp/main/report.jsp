@@ -172,7 +172,7 @@
                 </div>
                 <div class="col-1-3">
                     <div class="convert-box">
-                        <p>Convert file to:</p>
+                        <p>Download:</p>
                         <div class="col-3">
                             <input type="hidden" id="ripotiIssueJson" name="ripotiIssueJson" />
                             <input type="submit" value="PDF" />
@@ -188,7 +188,7 @@
             </div>
         </form>
     </section>
-    <a href="#go-down" class="go-down">Jump to Convert and Download Report</a>
+    <a href="#go-down" class="go-down">Jump to Download</a>
 </c:if>
 
 <c:if test="${ripotiJson == null}">
