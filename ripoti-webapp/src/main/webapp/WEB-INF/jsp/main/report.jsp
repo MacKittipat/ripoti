@@ -173,16 +173,18 @@
                 <div class="col-1-3">
                     <div class="convert-box">
                         <p>Download:</p>
-                        <div class="col-3">
+                        <div class="col-1-1">
                             <input type="hidden" id="ripotiIssueJson" name="ripotiIssueJson" />
                             <input type="submit" value="PDF" />
                         </div>
+                        <!--
                         <div class="col-3">
                             <input type="submit" class="disable-btn" value="Excel"/>
                         </div>
                         <div class="col-3">
                             <input type="submit" class="disable-btn" value="CSV"/>
                         </div>
+                        -->
                     </div>
                 </div>
             </div>
