@@ -87,6 +87,20 @@
                 <groupId>org.xhtmlrenderer</groupId>
                 <artifactId>flying-saucer-pdf</artifactId>
                 <version>9.0.3</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>bouncycastle</groupId>
+                        <artifactId>bcmail-jdk14</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>bouncycastle</groupId>
+                        <artifactId>bcprov-jdk14</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>bouncycastle</groupId>
+                        <artifactId>bctsp-jdk14</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.freemarker</groupId>
@@ -132,6 +146,24 @@
                 <optional>true</optional>
             </dependency>
             <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-deploy</artifactId>
+                <version>${jetty.version}</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-jsp</artifactId>
+                <version>${jetty.version}</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-http</artifactId>
+                <version>${jetty.version}</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
                 <groupId>com.abctech.ripoti</groupId>
                 <artifactId>ripoti-webapp</artifactId>
                 <version>${project.version}</version>
@@ -142,5 +174,6 @@
 
     <modules>
         <module>ripoti-webapp</module>
-    </modules>
+    <module>ripoti-app</module>
+  </modules>
 </project>
