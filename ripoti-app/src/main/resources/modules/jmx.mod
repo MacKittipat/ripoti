@@ -3,7 +3,7 @@
 #
 
 [lib]
-lib/jetty-jmx-${jetty.version}.jar
+*.jar
 
 [xml]
 etc/jetty-jmx.xml

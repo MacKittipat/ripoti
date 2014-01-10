@@ -6,7 +6,7 @@
 servlet
 
 [lib]
-lib/jsp/*.jar
+lib/*.jar
 
 [ini-template]
 # JSP Configuration

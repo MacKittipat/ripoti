@@ -6,7 +6,7 @@
 webapp
 
 [lib]
-lib/jetty-deploy-${jetty.version}.jar
+lib/*.jar
 
 [files]
 webapps/

@@ -6,4 +6,4 @@
 server
 
 [lib]
-lib/jetty-servlet-${jetty.version}.jar
+lib/*.jar

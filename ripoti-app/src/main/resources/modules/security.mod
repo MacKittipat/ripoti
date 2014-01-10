@@ -6,4 +6,4 @@
 server
 
 [lib]
-lib/jetty-security-${jetty.version}.jar
+*.jar
