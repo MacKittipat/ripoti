@@ -240,29 +240,26 @@
             var childIssues = new Array();
             for(var j=0; j<parentIssue.childIssues.length; j++) {
                 var childIssue = parentIssue.childIssues[j];
-                childIssues.push(new ChildIssue(
-                        childIssue.key,
-                        childIssue.summary,
-                        childIssue.title,
-                        childIssue.timeSpent.value
-                ));
+                childIssues.push(new ChildIssue(childIssue));
             }
             parentIssues.push(new ParentIssue(
                     parentIssue.key,
                     parentIssue.summary,
                     parentIssue.title,
+                    parentIssue.timeSpent.value,
                     ko.observableArray(childIssues)
             ));
         }
         return parentIssues;
     }
 
-    function ParentIssue(key, summary, title, childIssues) {
+    function ParentIssue(key, summary, title, timeSpentValue, childIssues) {
         var self = this;
         self.key = key;
         self.summary = summary;
         self.title = title;
         self.timeSpent = new Object();
+//        self.timeSpent.value = timeSpentValue;
         self.timeSpent.value = ko.computed(function() {
             var myChildIssues = childIssues();
             var timeSpentValue = 0;
@@ -274,13 +271,13 @@
         self.childIssues = childIssues;
     }
 
-    function ChildIssue(key, summary, title, timeSpentValue) {
+    function ChildIssue(childIssue) {
         var self = this;
-        self.key = key;
-        self.summary = summary;
-        self.title = title;
+        self.key = childIssue.key;
+        self.summary = childIssue.summary;
+        self.title = childIssue.title;
         self.timeSpent = new Object();
-        self.timeSpent.value = ko.observable(timeSpentValue);
+        self.timeSpent.value = ko.observable(childIssue.timeSpent.value);
     }
 
     function RipotiIssue() {
@@ -293,7 +290,7 @@
             var myParentIssues = self.parentIssues();
             var timeSpentValue = 0;
             for(var i=0; i< myParentIssues.length; i++) {
-                timeSpentValue += parseFloat(myParentIssues[i].timeSpent.value());
+                timeSpentValue += parseFloat(myParentIssues[i].timeSpent.value);
             }
             return timeSpentValue;
         }, self);

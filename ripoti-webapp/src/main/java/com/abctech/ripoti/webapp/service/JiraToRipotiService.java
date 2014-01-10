@@ -37,7 +37,6 @@ public class JiraToRipotiService {
                 parentIssue.setKey(pIssue.getKey());
                 parentIssue.setSummary(pIssue.getField().getSummary());
                 parentIssue.setTitle(createTitle(pIssue.getKey(), pIssue.getField().getSummary()));
-                int parentTotatTimeSpent = 0;
                 List<ChildIssue> childIssueList = new ArrayList<>();
                 // Child issue.
                 for(Issue cIssue : issues) {
@@ -54,14 +53,13 @@ public class JiraToRipotiService {
                         cTimeSpent.setValue(secToHr(cIssue.getField().getTimeSpent()));
                         childIssue.setTimeSpent(cTimeSpent);
                         // Increase total time spent.
-                        parentTotatTimeSpent += cIssue.getField().getTimeSpent();
                         totalTimeSpent += cIssue.getField().getTimeSpent();
                         childIssueList.add(childIssue);
                     }
                 } // End child issue.
                 TimeSpent pTimeSpent = new TimeSpent();
                 pTimeSpent.setUnit(TIME_SPENT_UNIT);
-                pTimeSpent.setValue(secToHr(parentTotatTimeSpent)); // Not pIssue.getField().getAggregateTimeSpent()
+                pTimeSpent.setValue(secToHr(pIssue.getField().getAggregateTimeSpent()));
                 parentIssue.setTimeSpent(pTimeSpent);
                 parentIssue.setChildIssues(childIssueList.toArray(new ChildIssue[childIssueList.size()]));
                 parentIssueList.add(parentIssue);
