@@ -251,26 +251,28 @@
                     parentIssue.key,
                     parentIssue.summary,
                     parentIssue.title,
+                    parentIssue.timeSpent.value,
                     ko.observableArray(childIssues)
             ));
         }
         return parentIssues;
     }
 
-    function ParentIssue(key, summary, title, childIssues) {
+    function ParentIssue(key, summary, title, timeSpentValue, childIssues) {
         var self = this;
         self.key = key;
         self.summary = summary;
         self.title = title;
         self.timeSpent = new Object();
-        self.timeSpent.value = ko.computed(function() {
-            var myChildIssues = childIssues();
-            var timeSpentValue = 0;
-            for(var i=0; i<myChildIssues.length; i++) {
-                timeSpentValue += parseFloat(myChildIssues[i].timeSpent.value());
-            }
-            return timeSpentValue;
-        }, childIssues);
+        self.timeSpent.value = timeSpentValue;
+//        self.timeSpent.value = ko.computed(function() {
+//            var myChildIssues = childIssues();
+//            var timeSpentValue = 0;
+//            for(var i=0; i<myChildIssues.length; i++) {
+//                timeSpentValue += parseFloat(myChildIssues[i].timeSpent.value());
+//            }
+//            return timeSpentValue;
+//        }, childIssues);
         self.childIssues = childIssues;
     }
 
@@ -293,7 +295,7 @@
             var myParentIssues = self.parentIssues();
             var timeSpentValue = 0;
             for(var i=0; i< myParentIssues.length; i++) {
-                timeSpentValue += parseFloat(myParentIssues[i].timeSpent.value());
+                timeSpentValue += parseFloat(myParentIssues[i].timeSpent.value);
             }
             return timeSpentValue;
         }, self);
