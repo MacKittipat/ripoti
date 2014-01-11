@@ -240,29 +240,21 @@
             var childIssues = new Array();
             for(var j=0; j<parentIssue.childIssues.length; j++) {
                 var childIssue = parentIssue.childIssues[j];
-                childIssues.push(new ChildIssue(
-                        childIssue.key,
-                        childIssue.summary,
-                        childIssue.title,
-                        childIssue.timeSpent.value
-                ));
+                childIssues.push(new ChildIssue(childIssue));
             }
             parentIssues.push(new ParentIssue(
-                    parentIssue.key,
-                    parentIssue.summary,
-                    parentIssue.title,
-                    parentIssue.timeSpent.value,
+                    parentIssue,
                     ko.observableArray(childIssues)
             ));
         }
         return parentIssues;
     }
 
-    function ParentIssue(key, summary, title, timeSpentValue2, childIssues) {
+    function ParentIssue(parentIssue, childIssues) {
         var self = this;
-        self.key = key;
-        self.summary = summary;
-        self.title = title;
+        self.key = parentIssue.key;
+        self.summary = parentIssue.summary;
+        self.title = parentIssue.title;
         self.timeSpent = new Object();
         var diffTimeSpentParentChild = null;
         self.timeSpent.value = ko.computed(function() {
@@ -272,20 +264,20 @@
                 timeSpentValue += parseFloat(myChildIssues[i].timeSpent.value());
             }
             if(diffTimeSpentParentChild == null) {
-                diffTimeSpentParentChild = timeSpentValue2 - timeSpentValue;
+                diffTimeSpentParentChild = parentIssue.timeSpent.value - timeSpentValue;
             }
             return timeSpentValue + diffTimeSpentParentChild;
         }, childIssues);
         self.childIssues = childIssues;
     }
 
-    function ChildIssue(key, summary, title, timeSpentValue) {
+    function ChildIssue(childIssue) {
         var self = this;
-        self.key = key;
-        self.summary = summary;
-        self.title = title;
+        self.key = childIssue.key;
+        self.summary = childIssue.summary;
+        self.title = childIssue.title;
         self.timeSpent = new Object();
-        self.timeSpent.value = ko.observable(timeSpentValue);
+        self.timeSpent.value = ko.observable(childIssue.timeSpent.value);
     }
 
     function RipotiIssue() {
