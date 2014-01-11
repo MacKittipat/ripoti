@@ -108,7 +108,7 @@
                         </div>
                         <div class="task-table">
                             <table>
-                                <thead>
+                                <thead data-bind="if: childIssues().length > 0">
                                     <tr>
                                         <th>Task</th>
                                         <th>Detail</th>
