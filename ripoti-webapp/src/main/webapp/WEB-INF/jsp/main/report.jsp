@@ -258,21 +258,24 @@
         return parentIssues;
     }
 
-    function ParentIssue(key, summary, title, timeSpentValue, childIssues) {
+    function ParentIssue(key, summary, title, timeSpentValue2, childIssues) {
         var self = this;
         self.key = key;
         self.summary = summary;
         self.title = title;
         self.timeSpent = new Object();
-        self.timeSpent.value = timeSpentValue;
-//        self.timeSpent.value = ko.computed(function() {
-//            var myChildIssues = childIssues();
-//            var timeSpentValue = 0;
-//            for(var i=0; i<myChildIssues.length; i++) {
-//                timeSpentValue += parseFloat(myChildIssues[i].timeSpent.value());
-//            }
-//            return timeSpentValue;
-//        }, childIssues);
+        var diffTimeSpentParentChild = null;
+        self.timeSpent.value = ko.computed(function() {
+            var myChildIssues = childIssues();
+            var timeSpentValue = 0;
+            for(var i=0; i<myChildIssues.length; i++) {
+                timeSpentValue += parseFloat(myChildIssues[i].timeSpent.value());
+            }
+            if(diffTimeSpentParentChild == null) {
+                diffTimeSpentParentChild = timeSpentValue2 - timeSpentValue;
+            }
+            return timeSpentValue + diffTimeSpentParentChild;
+        }, childIssues);
         self.childIssues = childIssues;
     }
 
@@ -295,7 +298,7 @@
             var myParentIssues = self.parentIssues();
             var timeSpentValue = 0;
             for(var i=0; i< myParentIssues.length; i++) {
-                timeSpentValue += parseFloat(myParentIssues[i].timeSpent.value);
+                timeSpentValue += parseFloat(myParentIssues[i].timeSpent.value());
             }
             return timeSpentValue;
         }, self);
