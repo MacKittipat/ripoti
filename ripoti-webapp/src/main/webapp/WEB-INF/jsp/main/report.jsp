@@ -177,14 +177,6 @@
                             <input type="hidden" id="ripotiIssueJson" name="ripotiIssueJson" />
                             <input type="submit" value="PDF" />
                         </div>
-                        <!--
-                        <div class="col-3">
-                            <input type="submit" class="disable-btn" value="Excel"/>
-                        </div>
-                        <div class="col-3">
-                            <input type="submit" class="disable-btn" value="CSV"/>
-                        </div>
-                        -->
                     </div>
                 </div>
             </div>
@@ -194,9 +186,7 @@
 </c:if>
 
 <c:if test="${ripotiJson == null}">
-
 <p style="text-align: center; font-size: 24px; color: #c0c0c0; margin-top: 200px;">Please select Board and Sprint.</p>
-
 </c:if>
 
 <footer>
@@ -266,7 +256,7 @@
             if(diffTimeSpentParentChild == null) {
                 diffTimeSpentParentChild = parentIssue.timeSpent.value - timeSpentValue;
             }
-            return timeSpentValue + diffTimeSpentParentChild;
+            return (timeSpentValue + diffTimeSpentParentChild).toFixed(2);
         }, childIssues);
         self.childIssues = childIssues;
     }
@@ -277,7 +267,7 @@
         self.summary = childIssue.summary;
         self.title = childIssue.title;
         self.timeSpent = new Object();
-        self.timeSpent.value = ko.observable(childIssue.timeSpent.value);
+        self.timeSpent.value = ko.observable(childIssue.timeSpent.value.toFixed(2));
     }
 
     function RipotiIssue() {
