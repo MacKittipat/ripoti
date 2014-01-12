@@ -82,7 +82,7 @@
                                                         </#escape>
                                                     </span>
                                                 </td>
-                                                <td><span>${childIssue.timeSpent.value}</span></td>
+                                                <td><span>${childIssue.timeSpent.value?string("0.##")}</span></td>
                                             </tr>
                                         </#list>
                                     </tbody>
