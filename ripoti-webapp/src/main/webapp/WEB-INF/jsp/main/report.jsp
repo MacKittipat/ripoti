@@ -256,7 +256,7 @@
             if(diffTimeSpentParentChild == null) {
                 diffTimeSpentParentChild = parentIssue.timeSpent.value - timeSpentValue;
             }
-            return (timeSpentValue + diffTimeSpentParentChild).toFixed(2);
+            return formatTimeSpent(timeSpentValue + diffTimeSpentParentChild);
         }, childIssues);
         self.childIssues = childIssues;
     }
@@ -267,7 +267,7 @@
         self.summary = childIssue.summary;
         self.title = childIssue.title;
         self.timeSpent = new Object();
-        self.timeSpent.value = ko.observable(childIssue.timeSpent.value.toFixed(2));
+        self.timeSpent.value = ko.observable(formatTimeSpent(childIssue.timeSpent.value));
     }
 
     function RipotiIssue() {
@@ -303,6 +303,14 @@
     function exportFile(frmId) {
         var ripotiIssueJson = ko.toJSON(ripotiIssue)
         $("#" + frmId + " #ripotiIssueJson").val(ripotiIssueJson);
+    }
+
+    function formatTimeSpent(timeSpent) {
+        var timeSpentStr = timeSpent + "";
+        if (timeSpentStr.indexOf('.') >= 0) {
+            return timeSpent.toFixed(2);
+        }
+        return timeSpent;
     }
     </c:if>
 </script>
