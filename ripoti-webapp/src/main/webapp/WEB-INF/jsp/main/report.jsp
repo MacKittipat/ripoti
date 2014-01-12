@@ -108,12 +108,12 @@
                         </div>
                         <div class="task-table">
                             <table>
-                                <thead data-bind="if: childIssues().length > 0">
+                                <thead>
                                     <tr>
-                                        <th>Task</th>
-                                        <th>Detail</th>
-                                        <th>Time (hr)</th>
-                                        <th>Delete</th>
+                                        <th data-bind="if: childIssues().length > 0">Task</th>
+                                        <th data-bind="if: childIssues().length > 0">Detail</th>
+                                        <th data-bind="if: childIssues().length > 0">Time (hr)</th>
+                                        <th data-bind="if: childIssues().length > 0">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody data-bind="foreach: childIssues">
