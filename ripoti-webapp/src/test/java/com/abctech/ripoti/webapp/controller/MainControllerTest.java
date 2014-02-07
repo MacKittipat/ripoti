@@ -1,52 +1,84 @@
 package com.abctech.ripoti.webapp.controller;
 
-import com.abctech.ripoti.webapp.json.jira.search.Issue;
-import com.abctech.ripoti.webapp.json.jira.search.Search;
-import com.abctech.ripoti.webapp.util.Base64Util;
-import org.junit.Ignore;
+import com.abctech.ripoti.webapp.service.IJiraAuthStorageService;
+import com.abctech.ripoti.webapp.service.JiraRestService;
+import com.abctech.ripoti.webapp.service.JiraToRipotiService;
+import com.abctech.ripoti.webapp.service.JiraViewStorageService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.web.client.RestTemplate;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-@Ignore
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:/ripoti-context-test.xml")
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+
+@RunWith(MockitoJUnitRunner.class)
 public class MainControllerTest {
 
-    @Autowired
-    private RestTemplate restTemplate;
+    @InjectMocks
+    private MainController mainController;
 
-    @Test
-    public void test() {
-        String base64Auth = Base64Util.encode("user:pass");
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Basic " + base64Auth);
-        HttpEntity<String> httpEntity = new HttpEntity<>(headers);
-        ResponseEntity<Search> response = restTemplate.exchange(
-                "https://apidev.atlassian.net/rest/api/2/search?jql=Sprint = 170 ORDER BY created ASC&maxResults=500&fields=summary,issuetype,timespent,description,subtasks,components,aggregatetimespent",
-                HttpMethod.GET,
-                httpEntity,
-                Search.class);
-        Search search = response.getBody();
-        Issue[] issues = search.getIssues();
-        for(Issue issue : issues) {
-            System.out.println("Key = " + issue.getKey());
-            System.out.println("Fields.Summary" + issue.getField().getSummary());
-//            System.out.println("Fields.Desc" + issue.getField().getDescription());
-            System.out.println("Fields.TimeSpent" + issue.getField().getTimeSpent());
-            System.out.println("==========");
-        }
+    @Mock
+    private JiraRestService jiraRestService;
+
+    @Mock
+    private IJiraAuthStorageService jiraAuthStorageService;
+
+    @Mock
+    private JiraToRipotiService jiraToRipotiService;
+
+    @Mock
+    private JiraViewStorageService jiraViewStorageService;
+
+    @Mock
+    private ObjectMapper jacksonObjectMapper;
+
+    private MockMvc mockMvc;
+
+    @Before
+    public void setUp() {
+        mockMvc = MockMvcBuilders.standaloneSetup(mainController).build();
     }
 
     @Test
-    public void test2() {
-        System.out.println(Base64Util.encode("user:pass"));
+    public void testIndex() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/"))
+                .andExpect(redirectedUrl("auth"));
+        mockMvc.perform(MockMvcRequestBuilders.get("/index"))
+                .andExpect(redirectedUrl("auth"));
     }
+
+    @Test
+    public void testAuthLoggedIn() throws Exception {
+        when(jiraAuthStorageService.getAuthorizationValue()).thenReturn("authvalue");
+        mockMvc.perform(MockMvcRequestBuilders.get("/auth"))
+                .andExpect(redirectedUrl("report"));
+    }
+
+    @Test
+    public void testAuthNotLoggedIn() throws Exception {
+        when(jiraAuthStorageService.getAuthorizationValue()).thenReturn(null);
+        mockMvc.perform(MockMvcRequestBuilders.get("/auth"))
+                .andExpect(model().attribute("pageContent", "main/auth"));
+    }
+
+//    @Test
+//    public void testAuthLoginSuccess() throws Exception {
+//        when(jiraAuthStorageService.getAuthorizationValue()).thenReturn(null);
+//        JiraSession jiraSession = new JiraSession();
+//        jiraSession.setName("name");
+//        when(jiraRestService.getJiraSession(anyString())).thenReturn(jiraSession);
+//        when(jiraAuthStorageService.getAuthorizationValue()).thenReturn("")
+//        mockMvc.perform(MockMvcRequestBuilders.post("/auth")
+//                .requestAttr("username", "myuser")
+//                .requestAttr("password", "mypass"))
+//                .andExpect(model().attribute("pageContent", "main/auth"));
+//    }
 }
